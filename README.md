@@ -93,4 +93,5 @@
  The leaderboard is a table that exists of four columns. The first column is a number that shows you the rank of the player. The second column is the player name. If you click on the name then you will go to their stats page. The third column will show the select stat from the selector. The fourth, and last, column shows you the time since their last update. If you want to update someone's position on the leaderboard then you only have to go to their stats page. Every day at 23:45/11:45 PM it will automatically update the stats of the five players who've been updated the longest ago.
 
 ## About
+  [Link](https://plotzes.ml/about)  
   On this page you'll find cards with information about me and the website. This isn't interactive, but just for information.
