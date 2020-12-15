@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Leaderboard</title>
+		<link rel="icon" type="image/svg" href="/assets/images/svg/icon-blue.svg">
+
+        <!--     CSS     -->
+        <link rel="stylesheet" href="/assets/css/core.css">
+        <link rel="stylesheet" href="/assets/css/header-sidebar.css">
+        <link rel="stylesheet" href="/assets/css/leaderboard.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+
+        <!--     JS     -->
+        <script src="/assets/javascript/header-sidebar.js"></script>
+        <script src="/assets/javascript/leaderboard.js"></script>
+
+
+        <meta name="pagename" content="leaderboard">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="description" content="Get an amazing leaderboard ordered by how many points a person has captured in TNT Wizards. You can update a player's stats by going to https://plotzes.ml/stats">
+        <meta name="theme-color" content="#00f0f0">
+
+        <meta property="og:url" content="https://plotzes.ml/leaderboard">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="TNT Wizards captured points leaderboard">
+        <meta property="og:site_name" content="Plotzes">
+        <meta property="og:description" content="Get an amazing leaderboard ordered by how many points a person has captured in TNT Wizards. You can update a player's stats by going to https://plotzes.ml/stats">
+        <meta property="og:image" content="https://plotzes.ml/assets/images/png/leaderboard.png">
+        <meta property="og:image:type" content="/assets/image/png">
+
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta property="twitter:domain" content="plotzes.ml">
+        <meta property="twitter:url" content="https://plotzes.ml/leaderboard">
+        <meta name="twitter:title" content="TNT Wizards captured points leaderboard">
+        <meta name="twitter:description" content="Get an amazing leaderboard ordered by how many points a person has captured in TNT Wizards. You can update a player's stats by going to https://plotzes.ml/stats">
+        <meta name="twitter:image" content="https://plotzes.ml/assets/images/png/leaderboard.png">
+	</head>
+	<body>
+        <div id="headerSidebar"></div>
+        <div id="root">
+            <div id="main">
+                <div id="loadingScreen">
+                    <p data-image="/assets/images/svg/loading.svg" class="convert-inline">Loading...</p>
+                </div>
+                <div id="tableContainer" style="display: none;">
+                    <div id="collapsible">Selector</div>
+                    <div id="content">
+                        <p onclick="showStat('k', 'Total Kills')">Total Kills</p>
+                        <p onclick="showStat('w', 'Wins')">Wizards Wins</p>
+                        <p onclick="showStat('points_capture', 'Captured Points')">Captured Points</p>
+                        <p onclick="showStat('a_k', 'Ancient Kills')">Ancient Kills</p>
+                        <p onclick="showStat('b_k', 'Blood Kills')">Blood Kills</p>
+                        <p onclick="showStat('f_k', 'Fire Kills')">Fire Kills</p>
+                        <p onclick="showStat('h_k', 'Hydro Kills')">Hydro Kills</p>
+                        <p onclick="showStat('i_k', 'Ice Kills')">Ice Kills</p>
+                        <p onclick="showStat('k_k', 'Kinetic Kills')">Kinetic Kills</p>
+                        <p onclick="showStat('s_k', 'Storm Kills')">Storm Kills</p>
+                        <p onclick="showStat('t_k', 'Toxic Kills')">Toxic Kills</p>
+                        <p onclick="showStat('w_k', 'Wither Kills')">Wither Kills</p>
+                    </div>
+                    <input type="text" id="search" placeholder="Search for a player..">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 7%;" onclick="sortTable(0)"># <span style="color: lightgray">&darr;</span></th>
+                                <th onclick="sortTable(1)">Player <span style="color: gray">&#8597;</span></th>
+                                <th id="stat-column" style="width: 25%;" onclick="sortTable(0, 2, true)">Captured Points <span style="color: gray">&#8597;</span></th>
+                                <th style="width: 25%;" onclick="sortTable(3)">Last Update <span style="color: gray">&#8597;</span></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+	</body>
+</html>

@@ -1,0 +1,281 @@
+/*
+For both the header and sidebar
+*/
+#headerSidebar {
+    height: 0;
+    width: 0;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+}
+
+#headerSidebar * {
+    transition: all 0.2s;
+}
+
+#headerSidebar text {
+    transition: none;
+}
+
+
+
+/*
+Only for header
+*/
+#header {
+    background-color: #222;
+    font-family: "Quicksand", sans-serif;
+    border-bottom: 1px solid #444;
+    box-sizing: border-box;
+    height: 70px;
+    width: 100vw;
+}
+
+#name {
+    height: 31px;
+    margin: 0;
+    position: fixed;
+    top: 20px;
+    left: 60px;
+}
+
+#theme-selector {
+    background-color: var(--main-color);
+    position: fixed;
+    top: 20px;
+    right: calc(50% - 15px);
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    animation: pulse 20s normal 5s infinite;
+}
+
+@keyframes pulse {
+    0%   {width: 30px; height: 30px; top: 20px; right: calc(50% - 15px);}
+    1%   {width: 35px; height: 35px; top: 17.5px; right: calc(50% - 17.5px);}
+    2%   {width: 30px; height: 30px; top: 20px; right: calc(50% - 15px);}
+}
+
+#theme-selector .theme-circle {
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin: 5px;
+    border: 1px solid transparent;
+}
+
+#theme-selector .theme-circle:hover {
+    border: 3px solid rgba(0, 0, 0, 0.3);
+}
+
+#theme-selector:hover #theme-popup {
+    visibility: visible;
+    opacity: 1;
+}
+
+#theme-popup {
+    display: inline-flex;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 135%;
+    left: 50%;
+    margin-left: -160px;
+    background-color: rgba(100, 100, 100, 0.6);
+    border-radius: 10px;
+    z-index: 10;
+}
+
+#theme-popup:after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border: 5px solid;
+    border-color: transparent transparent rgba(100, 100, 100, 0.6) transparent;
+    box-sizing: border-box;
+}
+
+#social {
+    margin: 0;
+    position: fixed;
+    top: 20px;
+    right: 10px;
+}
+
+#discord-icon {
+    display: inline;
+    cursor: pointer;
+    position: relative;
+}
+
+#discord-popup {
+    display: inline;
+    border-radius: 10px;
+    font-size: 20px;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 135%;
+    left: 50%;
+    margin-left: -70.7px;
+    background-color: rgba(100, 100, 100, 0.6);
+}
+
+#discord-popup:after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border: 5px solid;
+    border-color: transparent transparent rgba(100, 100, 100, 0.6) transparent;
+    box-sizing: border-box;
+}
+
+#discord-popup p {
+    margin: 0;
+    padding: 5px 10px;
+}
+
+#discord-icon:hover #discord-popup {
+    visibility: visible;
+    opacity: 1;
+}
+
+#social a {
+    border: none;
+    background-color: transparent;
+    margin: 0 3px;
+}
+
+#social svg {
+    height: 30px;
+}
+
+
+/*
+Only for sidebar
+*/
+#sidebar {
+    position: fixed;
+    height: calc(100vh - 70px);
+    background-color: #202020;
+    box-sizing: border-box;
+    left: 0;
+    bottom: 0;
+    max-width: 230px;
+    overflow: hidden;
+}
+
+#title {
+    display: inline-flex;
+    align-items: center;
+    height: 50px;
+    margin-top: 30px;
+    margin-left: 5px;
+    padding: 10px;
+}
+
+#sidebar p {
+    font-size: 2em;
+    line-height: 1;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#sidebar svg {
+    height: 50px;
+    margin-right: 20px;
+}
+
+#pages {
+    margin-top: 70px;
+    min-width: 230px;
+}
+
+#pages a, #pages .sidebar-collapsible {
+    display: block;
+    margin: 10px;
+    margin-top: 20px;
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+    color: lightgray;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#pages a:hover {
+    color: var(--main-color);
+    background-color: rgba(var(--main-color-rgb), 0.05);
+}
+
+#pages .sidebar-active {
+    color: var(--main-color);
+    background-color: rgba(var(--main-color-rgb), 0.05);
+}
+
+#pages .sidebar-content {
+    border-left: 1px solid gray;
+    margin-left: 20px;
+    overflow: hidden;
+    max-height: 0;
+}
+
+#pages .sidebar-content a {
+    margin-top: 10px;
+}
+
+#pages .sidebar-collapsible:hover .sidebar-content {
+    max-height: 161.2px;
+}
+
+#pages .sidebar-collapsible-active .sidebar-content {
+    max-height: none;
+}
+
+#pages .sidebar-collapsible svg {
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    top: 5px;
+    left: 5px;
+    transform: rotate(-90deg);
+    transition: all 0.2s;
+}
+
+#pages .sidebar-collapsible:hover svg, #pages .sidebar-collapsible-active svg {
+    transform: rotate(0deg) !important;
+}
+
+#collapse-sidebar {
+    position: fixed;
+    left: 10px;
+    bottom: 15px;
+    width: 35px;
+    height: 35px;
+    transform: rotate(180deg);
+    padding: 5px 12.5px;
+    border-radius: 27.5px;
+}
+
+#collapse-sidebar:hover {
+    background-color: rgba(var(--main-color-rgb), 0.1);
+}
+
+#sidebar.collapsed {
+    max-width: 80px;
+}
+
+#sidebar.collapsed #collapse-sidebar {
+    transform: rotate(0deg);
+}
+
+#sidebar.collapsed #pages {
+    opacity: 0;
+    visibility: hidden;
+}

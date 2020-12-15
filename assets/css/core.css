@@ -1,0 +1,103 @@
+:root {
+    --main-color: #00f0f0;
+    --main-color-rgb: 0, 240, 240;
+}
+
+body {
+    background-image: url("/assets/images/svg/background.svg");
+    background-size: 400px;
+    background-repeat: repeat;
+    background-color: #131313;
+    font-family: 'Quicksand', sans-serif;
+    color: lightgray;
+    margin: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+body * {
+    transition-property: color, background-color, border-color, margin-left;
+    transition-duration: 0.2s;
+}
+
+#root {
+    margin-top: 70px;
+    margin-left: 230px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--main-color);
+    border-bottom: 1px solid rgba(var(--main-color-rgb), 0.35);
+    background-color: rgba(var(--main-color-rgb), 0.05);
+    transition: all 0.2s;
+}
+
+a:hover {
+    background-color: rgba(var(--main-color-rgb), 0.1);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    background: #1e1e1e;
+    border: 1px solid #2e2e2e;
+}
+  
+::-webkit-scrollbar-thumb {
+    background-color: var(--main-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(var(--main-color-rgb), 0.7);
+    border-radius: 10px;
+}
+
+.convert-inline {
+    display: inline-block;
+}
+
+#error {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+    z-index: 9999999;
+}
+
+#error-message {
+    margin: 0 auto;
+    margin-top: 200px;
+    width: 60%;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #212121;
+    box-shadow: 0px 0px 35px 0px rgba(85, 0, 0, 0.5);
+}
+
+#error-text {
+    background-color: #303030;
+    color: rgba(var(--main-color-rgb), 0.8);
+}
+
+#error-yes, #error-no {
+    font-size: 18px;
+    padding: 10px;
+    background-color: #121212;
+    color: white;
+    border: 1px solid #121212;
+}
+
+#error-yes:hover, #error-no:hover {
+    cursor: pointer;
+    background-color: #1a1a1a;
+    border: 1px solid lightgray;
+}

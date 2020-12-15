@@ -1,0 +1,36 @@
+#root {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 30px;
+}
+
+.card {
+    margin: 20px;
+    background-color: #202020;
+    padding: 10px 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    transition: all 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    background-color: #242424;
+}
+
+.highlight {
+    color: var(--main-color);
+}
+
+img {
+    background: lightgray;
+    background: radial-gradient(rgba(126, 126, 126, 0.8) 0%, rgba(0, 0, 0, 0) 70%);
+    padding: 50px;
+}
+
+#logo {
+    width: 500px;
+    padding: 30px 0;
+}

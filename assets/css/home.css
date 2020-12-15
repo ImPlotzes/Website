@@ -1,0 +1,16 @@
+#banner {
+    height: calc(100vh - 70px);
+    background: rgb(37, 37, 37, 0.8);
+    background: radial-gradient(circle, rgb(41, 41, 41, 0.8) 0%, rgb(32, 32, 32, 0.8) 65%);
+    text-align: center;
+    box-shadow: inset 0px 0px 45px 0px rgba(255, 255, 255, 0.1);
+}
+
+#banner-icon {
+    margin: 10% 20% auto 20%;
+}
+
+#banner-text {
+    margin-top: 100px;
+    font-size: 18px;
+}

@@ -1,0 +1,107 @@
+#main {
+    text-align: center;
+    width: 70%;
+    margin: 0 auto;
+    padding: 25px 0;
+}
+
+#collapsible {
+    width: 40%;
+    margin: 0 auto;
+    background-color: #353535;
+    padding: 10px 20px;
+    font-size: 22px;
+}
+
+#collapsible:hover + #content, #content:hover {
+    max-height: 330px;
+}
+
+#content {
+    width: 35%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    background-color: #202020;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+}
+
+#content * {
+    margin: 0;
+    padding: 5px 10px;
+}
+
+#content *:hover {
+    background-color: #353535;
+}
+
+#search {
+    font-family: inherit;
+    width: 100%;
+    border: 1px solid gray;
+    padding: 3px 5px;
+    margin-bottom: 10px;
+    background: none;
+    color: lightgray;
+    box-sizing: border-box;
+    font-size: 1.1em;
+    transition: all 0.2s;
+    background-color: #131313;
+}
+
+#search:hover {
+    border-color: var(--main-color);
+}
+
+#search:focus {
+    outline: none;
+    border-color: var(--main-color);
+    transform: scale(1.05);
+}
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: 1px solid gray;
+}
+
+th {
+    font-size: 1.25em;
+    padding-bottom: 0.5em;
+    line-height: 1.8em;
+    cursor: pointer;
+    color: white;
+    transition: all 0.2s;
+    position: sticky;
+    top: 70px;
+    background-color: #353535;
+    z-index: 1;
+}
+
+th:hover {
+    background-color: #292929;
+}
+
+.bodyRow {
+    transition: all 0.2s;
+    background-color: #202020;
+    border: 1px solid gray;
+}
+
+.bodyRow:hover {
+    color: white;
+    transform: scale(1.05);
+    background-color: #292929;
+}
+
+td {
+    transition: background-color 0.2s;
+    padding: 0.4em;
+}
+
+td:hover {
+    background-color: #353535;
+    font-weight: 600;
+}

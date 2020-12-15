@@ -1,0 +1,115 @@
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--main-color);
+}
+
+button {
+    background-color: #222;
+    color: var(--main-color);
+    border: 3px solid rgba(var(--main-color-rgb), 0.1);
+    border-radius: 15px;
+    font-family: inherit;
+}
+
+button:hover {
+    border: 3px solid rgba(var(--main-color-rgb), 0.5);
+}
+
+button:focus {
+    outline: none;
+}
+
+#toggle {
+    position: fixed;
+    font-size: 18px;
+    z-index: 1;
+    bottom: 40px;
+    right: 40px;
+    padding: 10px;
+}
+
+#player {
+    font-family: inherit;
+    width: 75%;
+    border: 1px solid gray;
+    padding: 3px 5px;
+    background: none;
+    color: lightgray;
+    box-sizing: border-box;
+    font-size: 1.1em;
+    background-color: #131313;
+    outline: none;
+}
+
+#player:hover {
+    border-color: var(--main-color);
+}
+
+#player:focus {
+    border-color: var(--main-color);
+}
+
+#search {
+    display: block;
+    padding: 10px;
+    width: 45%;
+    font-size: 1.2em;
+    margin: 40px;
+}
+
+#loading {
+    display: none;
+}
+
+#main {
+    width: 80%;
+    margin-bottom: 15vh;
+}
+
+.collapsible {
+    position: relative;
+    z-index: 0;
+    font-size: 15px;
+    background-color: #1b1b1b;
+    padding: 15px 20px;
+    font-size: 16px;
+    color: var(--main-color);
+    margin-top: 10px;
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 3px;
+    border-image-source: linear-gradient(to left, rgba(var(--main-color-rgb), 0.0), rgba(var(--main-color-rgb), 0.5));
+}
+
+.collapsible:after {
+    content: "\02795";
+    float: right;
+    margin-left: 5px;
+}
+  
+.active:after {
+    content: "\2796";
+}
+
+#main div:not(.collapsible, .content) {
+    margin: 15px 0;
+}
+
+.content {
+    padding: 0 18px;
+    background-color: #222;
+    max-height: 0px;
+    overflow-y: hidden;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    box-shadow: inset 0px -5px 20px 0px rgb(255, 255, 255, 0.1);
+    border-radius: 0 0 10px 10px;
+    transition: max-height 0.3s ease-in;
+    white-space: nowrap;
+}
