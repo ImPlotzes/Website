@@ -120,4 +120,4 @@ function showStat(type, displayname) {
     document.getElementById("loadingScreen").style.display = "none";
     document.getElementById("tableContainer").style.display = "block";
 }
-window.onload = afterLoad;
+window.addEventListener("load", afterLoad);
