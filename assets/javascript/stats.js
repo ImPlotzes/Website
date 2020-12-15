@@ -56,7 +56,7 @@ async function loadPlayer(player) {
     window.history.pushState({"html":undefined}, "", url);
 
     /*Get the player data and then show it*/
-    let data = await fetch("https://test.plotzes.workers.dev?user=" + player);
+    let data = await fetch("https://stats.plotzes.ml?user=" + player);
     data = await data.json();
     showData(data, main);
     document.getElementById("loading").style.display = "none";
