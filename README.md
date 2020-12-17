@@ -14,7 +14,6 @@
  This is the main page. It's still in development so there's not much to see right now.
 <br />
 <br />
-<br />
 
 ## TNT Wizards
  ### Stats
@@ -77,7 +76,6 @@
     - *etc.*
 <br />
 <br />
-<br />
 
  ### Player count
  [Link](https://plotzes.ml/wizcount)  
@@ -100,7 +98,7 @@
   - Storm Kills
   - Toxic Kills
 
- The leaderboard is a table that exists of four columns. The first column is a number that shows you the rank of the player. The second column is the player name. If you click on the name then you will go to their stats page. The third column will show the select stat from the selector. The fourth, and last, column shows you the time since their last update. If you want to update someone's position on the leaderboard then you only have to go to their stats page. Every day at 23:45/11:45 PM it will automatically update the stats of the five players who've been updated the longest ago.
+ The leaderboard is a table that exists of four columns. The first column is a number that shows you the rank of the player. The second column is the player name. If you click on the name then you will go to their stats page. The third column will show the select stat from the selector. The fourth, and last, column shows you the time since their last update. If you want to update someone's position on the leaderboard then you only have to go to their stats page. Every day at 23:45, 23:50 and 23:55 UTC it will automatically update the stats of the five players who've been updated the longest ago.
 <br />
 <br />
 
