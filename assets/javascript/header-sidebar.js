@@ -57,6 +57,13 @@ async function afterLoad() {
         element.addEventListener("click", changeTheme);
     });
     document.getElementById("collapse-sidebar").addEventListener("click", collapse);
+    document.getElementById("custom-color").addEventListener("input", customColor);
+}
+
+function customColor() {
+    let color = this.value;
+    color = color.replace("#", "");
+    selectTheme(color);
 }
 
 async function loadHeaderSidebar() {

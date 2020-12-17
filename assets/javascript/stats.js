@@ -1,7 +1,7 @@
 /*
 LOAD EVENT OF THE WINDOW
 */
-function loadEvents(){
+function loadEvents() {
     /*Add event listeners*/
 	document.getElementById("toggle").addEventListener("click", toggleCollapse);
 	document.getElementById("search").addEventListener("click", showStats);

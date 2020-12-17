@@ -103,12 +103,16 @@ function showStat(type, displayname) {
         if(typeof player[type] !== "undefined") {
             const row = document.createElement("tr");
             row.classList.add("bodyRow")
-            const updateTime = new Date(player.last_update);
+            let updateTime = player.time;
+            if(!updateTime) {
+                updateTime = player.last_update;
+            }
+            updateTime = new Date(updateTime);
             const innerRow = `
             <td>${i + 1}</td>
             <td><a href="/stats.html?player=${player.name}">${player.name}</a></td>
             <td>${player[type]}</td>
-            <td>${updateTime.getHours().toString().padStart(2, "0")}:${updateTime.getMinutes().toString().padStart(2, "0")}, ${new Date(player.last_update).toLocaleDateString()}</td>`;
+            <td>${updateTime.getHours().toString().padStart(2, "0")}:${updateTime.getMinutes().toString().padStart(2, "0")}, ${updateTime.toLocaleDateString()}</td>`;
             row.innerHTML = innerRow;
             tbody.appendChild(row);
         } else {
