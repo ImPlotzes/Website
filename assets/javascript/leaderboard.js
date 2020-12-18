@@ -63,8 +63,8 @@ function sortTable(method, visualChange = method, arrowInverse = false) {
         if(method == 3) {
             const playerA = a.getElementsByTagName("td")[1].textContent;
             const playerB = b.getElementsByTagName("td")[1].textContent;
-            const timeA = new Date(lb.lb_data.filter(obj => { return obj.name == playerA })[0].last_update);
-            const timeB = new Date(lb.lb_data.filter(obj => { return obj.name == playerB })[0].last_update);
+            const timeA = new Date(lb.lb_data.filter(obj => { return obj.name == playerA })[0].time);
+            const timeB = new Date(lb.lb_data.filter(obj => { return obj.name == playerB })[0].time);
             return (timeA - timeB) * order;
         }
         const decision = (columnA - columnB) * order;
@@ -104,9 +104,6 @@ function showStat(type, displayname) {
             const row = document.createElement("tr");
             row.classList.add("bodyRow")
             let updateTime = player.time;
-            if(!updateTime) {
-                updateTime = player.last_update;
-            }
             updateTime = new Date(updateTime);
             const innerRow = `
             <td>${i + 1}</td>
