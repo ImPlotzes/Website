@@ -14,7 +14,7 @@
 }
 
 #collapsible:hover + #content, #content:hover {
-    max-height: 330px;
+    max-height: 360px;
 }
 
 #content {
