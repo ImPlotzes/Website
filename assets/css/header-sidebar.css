@@ -227,7 +227,6 @@ Only for sidebar
 #pages a, #pages .sidebar-collapsible {
     display: block;
     margin: 10px;
-    margin-top: 20px;
     font-size: 24px;
     background-color: transparent;
     border: none;
@@ -303,7 +302,7 @@ Only for sidebar
     transform: rotate(0deg);
 }
 
-#sidebar.collapsed #pages {
+#sidebar.collapsed #pages, #sidebar.collapsed #fake-news {
     opacity: 0;
     visibility: hidden;
 }

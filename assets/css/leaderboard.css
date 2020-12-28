@@ -14,22 +14,26 @@
 }
 
 #collapsible:hover + #content, #content:hover {
-    max-height: 360px;
+    max-height: 300px;
 }
 
 #content {
-    width: 35%;
+    width: 40%;
     margin: 0 auto;
     margin-bottom: 20px;
     background-color: #202020;
     max-height: 0;
     overflow: hidden;
     transition: all 0.4s ease-in-out;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 #content * {
     margin: 0;
     padding: 5px 10px;
+    width: 40%;
 }
 
 #content *:hover {
