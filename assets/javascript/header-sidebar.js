@@ -138,6 +138,7 @@ function collapse() {
     let button = document.getElementById("sidebar");
     if(button.classList.toggle("collapsed")) {
         document.getElementById("root").style.marginLeft = "80px";
+        document.getElementById("root")
     } else {
         document.getElementById("root").style.marginLeft = "230px";
     }
