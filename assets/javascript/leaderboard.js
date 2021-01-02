@@ -107,7 +107,7 @@ function showStat(type, displayname) {
             updateTime = new Date(updateTime);
             const innerRow = `
             <td>${i + 1}</td>
-            <td><a href="/stats.html?player=${player.name}">${player.name}</a></td>
+            <td><a href="/stats?player=${player.name}">${player.name}</a></td>
             <td>${player[type]}</td>
             <td>${updateTime.getHours().toString().padStart(2, "0")}:${updateTime.getMinutes().toString().padStart(2, "0")}, ${updateTime.toLocaleDateString()}</td>`;
             row.innerHTML = innerRow;
