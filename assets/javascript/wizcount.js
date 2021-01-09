@@ -67,7 +67,7 @@ async function updateChart() {
     }, 1000);
     document.getElementById("count").innerHTML = "Loading...";
     let history = await fetch("https://wizcount.plotzes.ml");
-    history = await apiHTML.json();
+    history = await history.json();
     chart.options.title.text = "History";
     let newLabels = [];
     let newData = [];
