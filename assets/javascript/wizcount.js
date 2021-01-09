@@ -66,21 +66,17 @@ async function updateChart() {
         document.getElementById("update").disabled = false;
     }, 1000);
     document.getElementById("count").innerHTML = "Loading...";
-    let apiHTML = await fetch("https://wizcount.plotzes.ml");
-    apiHTML = await apiHTML.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(apiHTML, "text/html");
-    const apiData = JSON.parse(doc.getElementsByTagName("pre")[0].innerHTML);
-    const datacenter = doc.getElementsByTagName("h1")[0].innerHTML;
-    chart.options.title.text = "History from datacenter " + datacenter;
+    let history = await fetch("https://wizcount.plotzes.ml");
+    history = await apiHTML.json();
+    chart.options.title.text = "History";
     let newLabels = [];
     let newData = [];
-    for(let i = 0; i < apiData.length; i++) {
-        const point = apiData[i];
-        newLabels.push(point.time);
+    for(let i = 0; i < history.length; i++) {
+        const point = history[i];
+        newLabels.push(point.date);
 
         const formattedPoint = {
-            x: new Date(point.time),
+            x: new Date(point.date),
             y: point.count
         };
         newData.push(formattedPoint);
