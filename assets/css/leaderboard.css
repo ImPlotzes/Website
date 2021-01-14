@@ -3,6 +3,7 @@
     width: 70%;
     margin: 0 auto;
     padding: 25px 0;
+    position: relative;
 }
 
 #collapsible {
@@ -15,12 +16,14 @@
 
 #collapsible:hover + #content, #content:hover {
     max-height: 300px;
+    border: 1px gray solid;
+    border-top: 1px rgba(0, 0, 0, 0) solid;
 }
 
 #content {
     width: 40%;
     margin: 0 auto;
-    margin-bottom: 20px;
+    left: 30%;
     background-color: #202020;
     max-height: 0;
     overflow: hidden;
@@ -28,6 +31,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    position: absolute;
+    z-index: 50;
+    border: 1px rgba(0, 0, 0, 0) solid;
 }
 
 #content * {
@@ -46,6 +52,7 @@
     border: 1px solid gray;
     padding: 3px 5px;
     margin-bottom: 10px;
+    margin-top: 30px;
     background: none;
     color: lightgray;
     box-sizing: border-box;
