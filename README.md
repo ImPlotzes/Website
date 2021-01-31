@@ -1,3 +1,5 @@
+![GitHub repo size](https://img.shields.io/github/repo-size/ImPlotzes/Website)
+![Lines of code](https://img.shields.io/tokei/lines/github.com/ImPlotzes/Website)
 # Website
  This is the source code for the website at https://plotzes.ml. It is mostly centred around getting TNT Wizards information. The following pages are available:
  - Home
