@@ -8,7 +8,7 @@
 
 .card {
     margin: 20px;
-    background-color: #202020;
+    background-color: #27292a;
     padding: 10px 30px;
     border-radius: 10px;
     max-width: 500px;
@@ -17,7 +17,7 @@
 
 .card:hover {
     transform: scale(1.1);
-    background-color: #242424;
+    background-color: #2b2d2e;
 }
 
 .highlight {

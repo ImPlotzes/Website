@@ -8,18 +8,24 @@
 
         <!-- CSS -->
         <link rel="stylesheet" href="/assets/css/core.css">
+        <link rel="stylesheet" href="/assets/css/header-sidebar.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <style>
             #card {
                 width: 600px;
-                margin: 5em auto;
+                margin: 0 auto;
+                margin-top: 150px;
                 padding: 2em;
-                background-color: #212121;
-                border-radius: 0.5em;
+                background-color: #27292a;
+                border-radius: 5px;
                 box-shadow: 2px 3px 7px 2px rgba(0, 0, 0, 0.2);
+                border: 1px solid #2d2f30;
             }
         </style>
+
+        <!-- JS -->
+        <script src="/assets/javascript/header-sidebar.js"></script>
 
 
         <!-- META  -->
@@ -46,10 +52,12 @@
     </head>
 
     <body>
-        <div id="card">
-            <h1>(&#65377;&#335;&#65103;&#335;)</h1>
-            <p>Wow! H-how did you end up here...<br>If you clicked on a link then you should probably tell someone that it's broken :P</p>
-            <a href="/">Click here to return to the homepage!</a>
+        <div id="root">
+            <div id="card">
+                <h1>(&#65377;&#335;&#65103;&#335;)</h1>
+                <p>Wow! H-how did you end up here...<br>If you clicked on a link then you should probably tell someone that it's broken :P</p>
+                <a href="/">Click here to return to the homepage!</a>
+            </div>
         </div>
     </body>
 </html>

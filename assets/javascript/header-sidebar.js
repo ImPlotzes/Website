@@ -46,19 +46,21 @@ async function afterLoad() {
         selectTheme("00f0f0");
     }
     await loadHeaderSidebar();
-    let images = document.getElementsByClassName("convert-inline");
-    images = Array.from(images);
-    for(let i = 0; i < images.length; i++) {
-        await convertImage(images[i]);
-    }
     Array.from(document.getElementsByClassName("theme-selection")).forEach(element => {
         const color = element.getAttribute("data-color");
         element.style.backgroundColor = "#" + color;
         element.addEventListener("click", changeTheme);
     });
-    document.getElementById("collapse-sidebar").addEventListener("click", collapse);
-    document.getElementById("custom-color").addEventListener("input", customColor);
+    let collapseElement = document.getElementById("collapse-sidebar");
+    if(collapseElement) {
+        collapseElement.addEventListener("click", collapse);
+    }
+    let colorElement = document.getElementById("custom-color");
+    if(colorElement) {
+        colorElement.addEventListener("input", customColor);
+    }
 }
+
 
 function customColor() {
     let color = this.value;
@@ -66,48 +68,38 @@ function customColor() {
     selectTheme(color);
 }
 
+
 async function loadHeaderSidebar() {
-    const response = await fetch("/assets/html/header-sidebar.html");
-    if(response.status == 200) {
-        let headerSidebar = await response.text();
-        headerSidebar = new DOMParser().parseFromString(headerSidebar, "text/html");
-        const pagename = document.querySelector('meta[name="pagename"]').content;
-        const element = headerSidebar.getElementById("page-" + pagename);
-        element.classList.add("sidebar-active");
-        if(element.parentElement.classList.contains("sidebar-content")) {
-            element.parentElement.parentElement.classList.add("sidebar-collapsible-active");
-        }
-        document.getElementById("headerSidebar").innerHTML = new XMLSerializer().serializeToString(headerSidebar);
-    } else {
-        document.getElementById("headerSidebar").innerHTML = "<!-- Couldn't load header and sidebar -->"
+    /*
+    let request = await fetch("/assets/html/header-sidebar.html");
+    let div = document.createElement("div");
+    div.innerHTML = await request.text();
+    div.childNodes.forEach(child => {
+        document.body.appendChild(child);
+    })
+    */
+
+    let pagename = document.querySelector('meta[name="pagename"]');
+    if(!pagename) {
+        return;
+    }
+    pagename = pagename.content;
+    const element = document.getElementById("page-" + pagename);
+    if(!pagename || !element) {
+        return;
+    }
+    element.classList.add("sidebar-active");
+    if(element.parentElement.classList.contains("sidebar-content")) {
+        element.parentElement.parentElement.classList.add("sidebar-collapsible-active");
     }
 }
 
-async function convertImage(image) {
-    const id = image.getAttribute("id");
-    const style = image.getAttribute("style");
-    const src = image.getAttribute("data-image");
-    const imageResponse = await fetch(src);
-    if(imageResponse.status == 200) {
-        const svgText = await imageResponse.text();
-        let buffer = document.createElement("div");
-        buffer.innerHTML = svgText;
-        const svg = buffer.firstElementChild;
-        if(id) {
-            svg.id = id;
-        }
-        svg.style = style;
-        const parent = image.parentElement;
-        parent.replaceChild(svg, image);
-    } else {
-        console.error("SVG inline loader: " + imageResponse.statusText);
-    }
-}
 
 function changeTheme() {
     const color = this.getAttribute("data-color");
     selectTheme(color);
 }
+
 
 function selectTheme(color) {
     color += "";
@@ -120,10 +112,12 @@ function selectTheme(color) {
     const root = document.documentElement;
     root.style.setProperty("--main-color", "#" + color);
     root.style.setProperty("--main-color-rgb", hexToRgb(color));
+
     try {
-        updateChartColor();
+        updateChartColor(color);
     } catch(e) {}
 }
+
 
 function hexToRgb(hex) {
     var bigint = parseInt(hex, 16);
@@ -134,14 +128,18 @@ function hexToRgb(hex) {
     return [r, g, b].join(", ");
 }
 
+
 function collapse() {
     let button = document.getElementById("sidebar");
     if(button.classList.toggle("collapsed")) {
-        document.getElementById("root").style.marginLeft = "80px";
-        document.getElementById("root")
+        document.getElementById("root").style.marginLeft = "0";
     } else {
         document.getElementById("root").style.marginLeft = "230px";
     }
-    
+    setTimeout(() => {
+        try {
+            chart.draw(data, options);
+        } catch(e) {}
+    }, 200);
 }
 window.addEventListener("load", afterLoad);

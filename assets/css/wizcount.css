@@ -2,24 +2,25 @@
     text-align: center;
 }
 
-#canvas-container {
-    width: 100%;
-    height: 400px;
-    text-align: center;
-    position: relative;
-    resize: vertical;
-    overflow: hidden;
-    border: 1px solid rgba(var(--main-color-rgb), 0.2);
-    box-sizing: border-box;
-    background-color: #171717;
-}
-
-canvas {
+#chart * {
     margin: 0 auto;
 }
 
-button {
-    margin-top: 30px;
+div.google-visualization-tooltip {
+    background-color: #27292a;
+    box-shadow: 5px 5px 25px 0 rgba(0, 0, 0, 0.75);
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#info {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#update {
     background-color: #222;
     color: var(--main-color);
     border: 3px solid rgba(var(--main-color-rgb), 0.1);
@@ -27,27 +28,22 @@ button {
     font-family: inherit;
     padding: 10px 15px;
     font-size: 18px;
-}
-
-button:hover {
-    border: 3px solid rgba(var(--main-color-rgb), 0.5);
-}
-
-button:focus {
     outline: none;
 }
 
-button:disabled {
+#update:hover {
+    border: 3px solid rgba(var(--main-color-rgb), 0.5);
+}
+
+#update:disabled {
     color: rgba(var(--main-color-rgb), 0.5);
     text-decoration: line-through;
 }
 
-ul {
-    list-style: none;
-    margin: 0;
+.header {
+    font-size: 20px;
 }
 
-li {
-    text-align: center;
-    margin: 0 auto;
+.content {
+    font-size: 40px;
 }

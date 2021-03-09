@@ -43,17 +43,200 @@
         <meta name="twitter:image" content="https://plotzes.ml/assets/images/png/stats.png"> <!-- Image to use -->
 	</head>
 	<body>
-        <div id="headerSidebar"></div>
+        
         <div id="root">
-            <button id="toggle">Open All</button>
-            <button id="search">Search</button>
-            <input id="player" placeholder="Search for a player or UUID..." maxlength="36">
+            <div id="search-container" class="card">
+                <h1>Search player</h1>
+                <input id="player" placeholder="Search for a player or UUID..." maxlength="36">
+                <button id="search">Search</button>
+                <div class="card">
+                    Enter a playername or UUID to get all kinds of stats about that player. You get general Hypixel stats, Wizards stats, TNT Games stats and Minecraft account stats. Try <b>Plotzes</b> for example and see what stats you get!
+                </div>
+            </div>
             <svg id="loading" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200px" height="200px" viewBox="0 0 100 100">
                 <path fill="none" stroke="var(--main-color)" stroke-width="8" stroke-dasharray="174.48047119140625 82.10845703125" d="M24.3 30C11.4 30 5 43.3 5 50s6.4 20 19.3 20c19.3 0 32.1-40 51.4-40 C88.6 30 95 43.3 95 50s-6.4 20-19.3 20C56.4 70 43.6 30 24.3 30z" stroke-linecap="round" style="transform-origin:50px 50px">
                     <animate attributeName="stroke-dashoffset" repeatCount="indefinite" dur="2s" keyTimes="0;1" values="0;256.58892822265625"></animate>
                 </path>
             </svg>
-            <div id="main"></div>
+            <div id="main">
+                <a href="/stats" id="back-link">&#8592; &nbsp; Go back</a>
+                <div id="data">
+                    <div id="profile">
+                        <div class="card">
+                            <div id="playername"></div>
+                            <hr>
+                            <div id="profile-stats"></div>
+                            <hr>
+                            <span class="subheader">Social media</span>
+                            <div id="profile-social" class="card"></div>
+                        </div>
+                    </div>
+                    <div id="stats">
+                        <div class="collapsible">
+                            <h3>Wizards stats</h3>
+                            <div class="content card">
+                                <div id="wiz-stats"></div>
+                                <hr>
+                                <span class="subheader">Classes</span>
+                                <div class="card">
+                                    <span id="selec-class"></span>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <td>Class</td>
+                                                <td>Kills</td>
+                                                <td>Deaths</td>
+                                                <td>Assists</td>
+                                                <td>K/D</td>
+                                                <td>Healed</td>
+                                                <td>Damage</td>
+                                                <td>Power </td>
+                                                <td>Mana</td>
+                                                <td>Prestige</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Ancient</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Blood</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fire</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hydro</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ice</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Kinetic</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Storm</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Toxic</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Wither</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapsible">
+                            <h3>TNT Games stats</h3>
+                            <div class="content card">
+                                <div id="tnt-stats"></div>
+                                <hr>
+                                <span class="subheader">TNT Games settings</span>
+                                <div class="card">
+                                    <div id="tnt-settings"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapsible">
+                            <h3>Minecraft account stats</h3>
+                            <div class="content card">
+                                <div id="mc-stats"></div>
+                                <hr>
+                                <span class="subheader">Skin</span>
+                                <div class="card">
+                                    <div id="mc-skin"></div>
+                                </div>
+                                <hr>
+                                <span class="subheader">Username history</span>
+                                <div id="mc-history"class="card"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 	</body>
 </html>

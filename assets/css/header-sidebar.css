@@ -1,34 +1,60 @@
 /*
-For both the header and sidebar
-*/
-#headerSidebar {
-    height: 0;
-    width: 0;
-    position: fixed;
-    top: 0;
-    z-index: 9999;
-}
-
-#headerSidebar * {
-    transition: all 0.2s;
-}
-
-#headerSidebar text {
-    transition: none;
-}
-
-
-
-/*
 Only for header
 */
 #header {
-    background-color: #222;
+    background-color: #191b1d;
     font-family: "Quicksand", sans-serif;
-    border-bottom: 1px solid #444;
-    box-sizing: border-box;
     height: 70px;
     width: 100vw;
+    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    z-index: 50;
+}
+
+#header *:not(tspan) {
+    transition: all 0.2s;
+}
+
+#collapse-sidebar {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    transition: all 0.2s;
+}
+
+#collapse-sidebar::before {
+    content: "";
+    position: absolute;
+    height: 3px;
+    width: 20px;
+    background-color: var(--main-color);
+    top: 8.5px;
+    left: 5px;
+    transition: all 0.2s;
+}
+
+#collapse-sidebar::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    width: 20px;
+    background-color: var(--main-color);
+    top: 18.5px;
+    left: 5px;
+    transition: all 0.2s;
+}
+
+#collapse-sidebar:hover::before {
+    top: 13.5px;
+    transform: rotate(45deg);
+}
+
+#collapse-sidebar:hover::after {
+    top: 13.5px;
+    transform: rotate(-45deg);
 }
 
 #name {
@@ -36,7 +62,7 @@ Only for header
     margin: 0;
     position: fixed;
     top: 20px;
-    left: 60px;
+    left: 80px;
 }
 
 #theme-selector {
@@ -89,9 +115,10 @@ Only for header
     left: 50%;
     width: 320px;
     margin-left: -160px;
-    background-color: rgba(100, 100, 100, 0.6);
+    background-color: rgba(54, 55, 56, 0.5);
+    backdrop-filter: blur(10px);
     border-radius: 10px;
-    z-index: 10;
+    z-index: 51;
 }
 
 #theme-popup:after {
@@ -101,7 +128,7 @@ Only for header
     left: 50%;
     margin-left: -5px;
     border: 5px solid;
-    border-color: transparent transparent rgba(100, 100, 100, 0.6) transparent;
+    border-color: transparent transparent rgba(54, 55, 56, 0.5) transparent;
     box-sizing: border-box;
 }
 
@@ -148,8 +175,12 @@ Only for header
     position: absolute;
     top: 135%;
     left: 50%;
-    margin-left: -70.7px;
-    background-color: rgba(100, 100, 100, 0.6);
+    margin-left: -85px;
+    background-color: rgba(54, 55, 56, 0.5);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    width: 170px;
+    padding-bottom: 10px;
 }
 
 #discord-popup:after {
@@ -159,13 +190,12 @@ Only for header
     left: 50%;
     margin-left: -5px;
     border: 5px solid;
-    border-color: transparent transparent rgba(100, 100, 100, 0.6) transparent;
+    border-color: transparent transparent rgba(54, 55, 56, 0.5) transparent;
     box-sizing: border-box;
 }
 
-#discord-popup p {
-    margin: 0;
-    padding: 5px 10px;
+#discord-popup * {
+    margin: 5px auto;
 }
 
 #discord-icon:hover #discord-popup {
@@ -173,7 +203,7 @@ Only for header
     opacity: 1;
 }
 
-#social a {
+#social a:not(#discord-popup *) {
     border: none;
     background-color: transparent;
     margin: 0 3px;
@@ -188,14 +218,20 @@ Only for header
 Only for sidebar
 */
 #sidebar {
-    position: fixed;
     height: calc(100vh - 70px);
-    background-color: #202020;
+    background-color: #191b1d;
+    border-top: 1px solid #000;
     box-sizing: border-box;
-    left: 0;
-    bottom: 0;
+    box-shadow: inset -5px 0 10px -5px rgba(0, 0, 0, 0.5);
     max-width: 230px;
     overflow: hidden;
+    position: fixed;
+    top: 70px;
+    z-index: 50;
+}
+
+#sidebar * {
+    transition: all 0.2s;
 }
 
 #title {
@@ -272,37 +308,12 @@ Only for sidebar
     top: 5px;
     left: 5px;
     transform: rotate(-90deg);
-    transition: all 0.2s;
 }
 
 #pages .sidebar-collapsible:hover svg, #pages .sidebar-collapsible-active svg {
     transform: rotate(0deg) !important;
 }
 
-#collapse-sidebar {
-    position: fixed;
-    left: 10px;
-    bottom: 15px;
-    width: 35px;
-    height: 35px;
-    transform: rotate(180deg);
-    padding: 5px 12.5px;
-    border-radius: 27.5px;
-}
-
-#collapse-sidebar:hover {
-    background-color: rgba(var(--main-color-rgb), 0.1);
-}
-
 #sidebar.collapsed {
-    max-width: 80px;
-}
-
-#sidebar.collapsed #collapse-sidebar {
-    transform: rotate(0deg);
-}
-
-#sidebar.collapsed #pages, #sidebar.collapsed #fake-news {
-    opacity: 0;
-    visibility: hidden;
+    max-width: 0;
 }

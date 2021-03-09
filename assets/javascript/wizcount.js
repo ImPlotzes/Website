@@ -1,134 +1,152 @@
 let chart;
-function loader() {
-    document.getElementById("update").addEventListener("click", updateChart);
-    document.getElementById("24hTime").addEventListener("change", timeChange);
-    document.getElementById("seconds").addEventListener("change", timeChange);
-
-    var ctx = document.getElementById("graph").getContext("2d");
-    Chart.defaults.global.defaultFontColor = "lightgray";
-    Chart.defaults.global.defaultFontFamily = "'Quicksand', sans-serif";
-    chart = new Chart(ctx, {
-        type: "line",
-        data: {
-            datasets: [{
-                label: "Player count",
-                data: [],
-                borderColor: "rgba(" + document.documentElement.style.getPropertyValue('--main-color-rgb') + ", 0.29)",
-                backgroundColor: "rgba(" + document.documentElement.style.getPropertyValue('--main-color-rgb') + ", 0.06)",
-                pointStyle: "rectRot",
-                pointBackgroundColor: document.documentElement.style.getPropertyValue('--main-color')
-            }]
+let data;
+let record = 0;
+let options = {
+    colors: ["#00f0f0"],
+    legend: {
+        position: "in",
+        textStyle: {
+            color: "lightgray"
+        }
+    },
+    animation: {
+        startup: true,
+        duration: 1500,
+        easing: "out"
+    },
+    backgroundColor: "transparent",
+    fontName: "Quicksand",
+    hAxis: {
+        title: "Time (local)",
+        titleTextStyle: {
+            color: 'lightgray'
         },
-        options: {
-            title: {
-                display: true,
-                text: "Loading..."
-            },
-            maintainAspectRatio: false,
-            tooltips: {
-                intersect: false
-            },
-            legend: {
-                position: "bottom",
-                align: "start"
-            },
-            scales: {
-                yAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: "# of players in Wizards"
-                    },
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }],
-                xAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: "Time (local)"
-                    },
-                    type: "time",
-                    time: {
-                        unit: "minute",
-                        displayFormats: { minute: "HH:mm" },
-                        tooltipFormat: "MMMM Do, HH:mm"
-                    }
-                }]
+        textStyle: {
+            color: "gray"
+        },
+        gridlines: {
+            color: "#343536",
+            units: {
+                days: {format: ["MMM dd"]},
+                hours: {format: ["HH:mm"]},
+                minutes: {format: ["HH:mm", ":mm"]},
+                seconds: {format: ["HH:mm:ss", "ss's'"]}
+            }
+        },
+        minorGridlines: {
+            color: "#282a2b",
+            units: {
+                hours: {format: ["HH:mm:ss", "HH:mm"]},
+                minutes: {format: [":mm"]},
+                seconds: {format: ["HH:mm:ss", "ss's'"]}
             }
         }
-    });
-    updateChart();
+    },
+    vAxis: {
+        title: "Player Count",
+        baseline: 0,
+        titleTextStyle: {
+            color: 'lightgray'
+        },
+        textStyle: {
+            color: "gray"
+        },
+        gridlines: {
+            color: "none"
+        }
+    },
+    chartArea: {
+        width: "90%",
+        height: "75%"
+    },
+    tooltip: {
+        isHtml: true,
+        showColorCode: true,
+        textStyle: {
+            color: "lightgray"
+        }
+    },
+    crosshair: {
+        orientation: "horizontal",
+        color: "gray",
+        trigger: "both"
+    },
+    explorer: {}
+}
+function loader() {
+    document.getElementById("update").addEventListener("click", updateChartData);
+
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);    
 }
 
-async function updateChart() {
+async function drawChart() {
     document.getElementById("update").disabled = true;
-    setTimeout(() => {
-        document.getElementById("update").disabled = false;
-    }, 1000);
-    document.getElementById("count").innerHTML = "Loading...";
-    let history = await fetch("https://wizcount.plotzes.ml");
-    history = await history.json();
-    chart.options.title.text = "History";
-    let newLabels = [];
-    let newData = [];
-    for(let i = 0; i < history.length; i++) {
-        const point = history[i];
-        newLabels.push(point.date);
+    let apiData = await fetch("https://wizcount.plotzes.ml");
+    apiData = await apiData.json();
+    let formattedData = [];
+    apiData.forEach(object => {
+        let arr = [];
+        arr.push(new Date(object.date));
+        arr.push(object.count);
+        formattedData.push(arr);
+        record = object.count > record ? object.count : record;
+    });
 
-        const formattedPoint = {
-            x: new Date(point.date),
-            y: point.count
-        };
-        newData.push(formattedPoint);
-    }
-
-    const diffMs = newData[newData.length - 1].x - newData[0].x;
-    const diffMins = Math.floor((diffMs/1000)/60);
-    let stepSize;
-    if(diffMins < 1 * 60) {
-        stepSize = 1;
-    } else if(diffMins < 3 * 60) {
-        stepSize = 5;
-    } else if(diffMins < 8.5 * 60) {
-        stepSize = 10;
-    } else if(diffMins < 10 * 60) {
-        stepSize = 15;
+    if(apiData.length == 0) {
+        document.getElementById("count").innerHTML = "??";
+        document.getElementById("record").innerHTML = "??";
     } else {
-        stepSize = 30;
+        document.getElementById("count").innerHTML = apiData[apiData.length - 1].count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById("record").innerHTML = record.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+    data = new google.visualization.DataTable();
+    data.addColumn("datetime", "Time");
+    data.addColumn("number", "Player Count");
+    data.addRows(formattedData);
 
-    chart.options.scales.xAxes[0].time.stepSize = stepSize;
-    chart.data.labels = newLabels;
-    chart.data.datasets[0].data = newData;
-    updateTime(document.getElementById("24hTime").checked, document.getElementById("seconds").checked);
+    chart = new google.visualization.AreaChart(document.getElementById('chart'));
+    var date_formatter = new google.visualization.DateFormat({ 
+        pattern: "MMM dd, HH:mm:ss"
+    }); 
+    date_formatter.format(data, 0);
+
+    chart.draw(data, options);
+    document.getElementById("update").disabled = false;
 }
 
-function timeChange(event) {
-    updateTime(document.getElementById("24hTime").checked, document.getElementById("seconds").checked);
+
+function updateChartColor(color) {
+    options.colors[0] = "#" + color;
+    chart.draw(data, options);
 }
 
-function updateTime(milTime, seconds) {
-    let time = milTime ? "HH:mm" : "hh:mm";
-    if(seconds){
-        time += ":ss";
-    }
-    if(!milTime) {
-        time += " A";
-    }
 
-    chart.options.scales.xAxes[0].time.displayFormats.minute = time.replace(":ss", "");
-    chart.options.scales.xAxes[0].time.tooltipFormat = "MMMM Do, " + time;
-    const lastCall = chart.data.datasets[0].data[chart.data.datasets[0].data.length - 1];
-    const formattedTime = moment(lastCall.x).format(time);
-    document.getElementById("count").innerHTML = "Wizards had " + lastCall.y + " players at " + formattedTime;
-    chart.update();
-}
-
-function updateChartColor() {
-    chart.data.datasets[0].borderColor = "rgba(" + document.documentElement.style.getPropertyValue('--main-color-rgb') + ", 0.29)";
-    chart.data.datasets[0].backgroundColor = "rgba(" + document.documentElement.style.getPropertyValue('--main-color-rgb') + ", 0.06)";
-    chart.data.datasets[0].pointBackgroundColor = document.documentElement.style.getPropertyValue('--main-color');
-    chart.update();
+async function updateChartData() {
+    document.getElementById("update").disabled = true;
+    let apiData = await fetch("https://wizcount.plotzes.ml");
+    apiData = await apiData.json();
+    document.getElementById("count").innerHTML = apiData[apiData.length - 1].count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    let lastDate = data.getValue(data.getNumberOfRows() - 1, 0);
+    let newRows = [];
+    apiData.forEach(object => {
+        let date = new Date(object.date);
+        if(date - lastDate > 0) {
+            let arr = [];
+            arr.push(date);
+            arr.push(object.count);
+            newRows.push(arr);
+            record = object.count > record ? object.count : record;
+        }
+    });
+    document.getElementById("record").innerHTML = record.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    data.insertRows(data.getNumberOfRows(), newRows);
+    var date_formatter = new google.visualization.DateFormat({ 
+        pattern: "MMM dd, HH:mm:ss"
+    }); 
+    date_formatter.format(data, 0);
+    chart.draw(data, options);
+    document.getElementById("update").disabled = false;
 }
 
 window.addEventListener("load", loader);

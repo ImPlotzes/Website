@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 #main {
     text-align: center;
     width: 70%;
@@ -9,13 +13,14 @@
 #collapsible {
     width: 40%;
     margin: 0 auto;
-    background-color: #353535;
+    background-color: #2d2f30;
     padding: 10px 20px;
     font-size: 22px;
+    z-index: 15;
 }
 
 #collapsible:hover + #content, #content:hover {
-    max-height: 300px;
+    max-height: 344px;
     border: 1px gray solid;
     border-top: 1px rgba(0, 0, 0, 0) solid;
 }
@@ -24,26 +29,71 @@
     width: 40%;
     margin: 0 auto;
     left: 30%;
-    background-color: #202020;
+    background-color: #27292a;
     max-height: 0;
     overflow: hidden;
     transition: all 0.4s ease-in-out;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     position: absolute;
-    z-index: 50;
+    z-index: 10;
     border: 1px rgba(0, 0, 0, 0) solid;
+    box-shadow: 0px 7px 27px 0px rgba(0,0,0,0.75);
 }
 
-#content * {
+#content p {
+    position: relative;
     margin: 0;
     padding: 5px 10px;
     width: 40%;
 }
 
-#content *:hover {
+#content p:after {
+    content: "";
+    background: #808080;
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: all 0.4s ease-out;
+}
+
+#content p:active:after {
+    width: 0;
+    height: 0;
+    left: 50%;
+    top: 50%;
+    opacity: 1;
+    transition: 0s
+}
+
+#content p:hover {
     background-color: #353535;
+}
+
+select {
+    font-family: inherit;
+    color: lightgray;
+    background-color: #38393a;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+option {
+    font-family: inherit;
+    color: lightgray;
+    background-color: #38393a;
+}
+
+#lb-info {
+    margin: 10px 0 0 0;
 }
 
 #search {
@@ -52,13 +102,12 @@
     border: 1px solid gray;
     padding: 3px 5px;
     margin-bottom: 10px;
-    margin-top: 30px;
     background: none;
     color: lightgray;
     box-sizing: border-box;
     font-size: 1.1em;
     transition: all 0.2s;
-    background-color: #131313;
+    background-color: #191b1d;
 }
 
 #search:hover {
@@ -75,7 +124,7 @@ table {
     width: 100%;
     border-spacing: 0;
     border-collapse: collapse;
-    border: 1px solid gray;
+    border: 1px solid #3f4141;
 }
 
 th {
@@ -86,25 +135,29 @@ th {
     color: white;
     transition: all 0.2s;
     position: sticky;
-    top: 70px;
-    background-color: #353535;
+    top: 69px;
+    background-color: #323435;
     z-index: 1;
 }
 
+#stat-column {
+    color: var(--main-color);
+}
+
 th:hover {
-    background-color: #292929;
+    background-color: #2d2f30;
 }
 
 .bodyRow {
     transition: all 0.2s;
-    background-color: #202020;
-    border: 1px solid gray;
+    background-color: #27292a;
+    border: 1px solid #3f4141;
 }
 
 .bodyRow:hover {
     color: white;
     transform: scale(1.05);
-    background-color: #292929;
+    background-color: #2d2f30;
 }
 
 td {
@@ -113,6 +166,40 @@ td {
 }
 
 td:hover {
-    background-color: #353535;
+    background-color: #323435;
     font-weight: 600;
+}
+
+#pagination {
+    margin-top: 10px;
+}
+
+#pagination * {
+    width: 40px;
+    height: 40px;
+    font-family: inherit;
+    padding: 0;
+    border: none;
+    background-color: #2d2f30;
+    color: lightgray;
+    outline: none;
+    font-size: 16px;
+}
+
+#pagination *:hover {
+    background-color: #323435;
+}
+
+#currentPage {
+    background-color: rgba(var(--main-color-rgb), 0.8);
+    color: #1d1f20;
+}
+
+#currentPage:hover {
+    background-color: var(--main-color);
+}
+
+#scroll-setting {
+    margin-top: 15px;
+    outline: none;
 }

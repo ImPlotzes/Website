@@ -3,17 +3,22 @@ LOAD EVENT OF THE WINDOW
 */
 function loadEvents() {
     /*Add event listeners*/
-	document.getElementById("toggle").addEventListener("click", toggleCollapse);
 	document.getElementById("search").addEventListener("click", showStats);
-	document.getElementById("player").addEventListener("keyup", enterName);
+    document.getElementById("player").addEventListener("keyup", enterName);
+    
+    document.querySelectorAll(".collapsible h3").forEach(head => {
+        head.addEventListener("click", collapsibleEvent);
+    });
 	
 
     /*Check if page loaded with player in URL*/
     const params = (new URL(document.location)).searchParams;
-    const player = params.get("player");
-	if(player) {
-        document.getElementById("player").value = player;
+    const player = params.get("player") || document.location.pathname.replace("/stats", "").replace("/", "");
+	if(player != "" && player) {
         loadPlayer(player);
+    } else {
+        document.getElementById("search-container").style.display = "inline-block";
+        document.getElementById("loading").style.display = "none";
     }
 }
 
@@ -35,90 +40,141 @@ function enterName(event) {
 /*
 CLICK EVENT OF SEARCH BUTTON
 */
-function showStats(){
-    /*Get the player and show the stats*/
+function showStats() {
+    /*Get the player and go to the stats page*/
 	let player = document.getElementById("player").value;
-	loadPlayer(player);
+    console.log(window.location.host);
+	window.location.href = window.location.origin + "/stats/" + player;
 }
 
 
 
 async function loadPlayer(player) {
-    /*Show loading SVG and empty current stats*/
-    let main = document.getElementById("main");
-    main.style.display = "none";
-    document.getElementById("loading").style.display = "block";
-    main.innerHTML = "";
-
-    /*Change the URL in the browser without needing a reload*/
-    const url = new URL(window.location);
-    url.searchParams.set("player", player);
-    window.history.pushState({"html":undefined}, "", url);
-
     /*Get the player data and then show it*/
     let data = await fetch("https://stats.plotzes.ml?user=" + player);
     data = await data.json();
-    showData(data, main);
+    let success = showData(data);
     document.getElementById("loading").style.display = "none";
-    main.style.display = "block";
+    if(success) {
+        document.getElementById("main").style.display = "block";
+    } else {
+        document.getElementById("search-container").style.display = "inline-block";
+    }
 } 
 
 
 
-function showData(json, parent){
-    /*Loop through each key of the JSON Object*/
-    Object.keys(json).forEach(key => {
-        const value = json[key];
-        key = key.replace(/_/g, " ");
+function showData(json){
+    /*Check if the api call was successful, if not then show the message and the error*/
+    if(!json.success) {
+        let messageDiv = document.querySelector("#search + .card");
+        messageDiv.innerHTML = json.message + "<br><br>(" + json.error + ")";
+        messageDiv.style.border = "1px solid #c51313";
+        return false;
+    }
 
-        /*Check if the value of the key is another JSON Object*/
-        if(typeof value == "object" && value) {
+    /*Fill in the player name and the rest of the "profile card at the left"*/
+    document.getElementById("playername").innerHTML = json.data.profile.name;
+    addStats(json.data.profile.stats, document.getElementById("profile-stats"));
+    if(JSON.stringify(json.data.profile.social) == "{}") {
+        document.getElementById("profile-social").innerHTML = "<b>No social media connected</b>";
+    } else {
+        addStats(json.data.profile.social, document.getElementById("profile-social"));
+    }
+    
+    /*Fill the Wizards stats*/
+    showWizStats(json.data.wiz);
 
-            /*If the value is an array then it's the username history, so show that the right way*/
-            if(Array.isArray(value)) {
-                let contentString = "";
-                for(let i = 0; i < value.length; i++) {
-                    let object = value[i];
-                    contentString += "<div><b>Username</b>: " + object.username + "</div>";
-                    contentString += "<div><b>Since</b>: " + (object.changed_at ? new Date(object.changed_at).toLocaleString() : "----") + "</div>";
-                    if(i < value.length - 1) {
-                        contentString += "<hr>";
-                    }
-                }
-                addCollapsible(key, contentString, parent)
-            } else {
-                /*The value was an Object but not an array so recursively call this function with the value as the JSON Object and a new collapsible as the parrent*/
-                showData(value, addCollapsible(key, "", parent));
+    /*Fill the TNT Games stats*/
+    addStats(json.data.tnt.stats, document.getElementById("tnt-stats"));
+    addStats(json.data.tnt.settings, document.getElementById("tnt-settings"));
+
+    /*Fill the MC account stats*/
+    showMcStats(json.data.mc);
+    return true;
+}
+
+
+function showWizStats(wiz) {
+    let wizStats = document.getElementById("wiz-stats");
+    addStats(wiz.stats, wizStats);
+
+    document.getElementById("selec-class").innerHTML = "<b>Selected class: </b>" + wiz.selected_class.charAt(0).toUpperCase() + wiz.selected_class.slice(1);
+    let classStats = wiz.classes;
+    let tableRows = document.querySelectorAll("tbody tr");
+    let i = 0;
+    tableRows.forEach(row => {
+        let cells = row.children;
+        for(let j = 1; j <= classStats.length; j++) {
+            let value = classStats[i][j - 1].toString();
+            if(isNumeric(value)){
+                value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
+            cells[j].innerHTML = value;
+        }
+        i++;
+    });
+}
+
+
+const dateOptions = {
+    weekday: "long",
+    day: "numeric",
+    year: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "UTC",
+    timeZoneName: "short"
+};
+function showMcStats(mc) {
+    addStats(mc.stats, document.getElementById("mc-stats"));
+    addStats(mc.skin, document.getElementById("mc-skin"));
+
+    let history = document.getElementById("mc-history");
+    history.innerHTML = "";
+    let i = 0;
+    mc.history.forEach(entry => {
+        i++;
+        let name = entry.username;
+        let since = entry.changed_at;
+        if(since) {
+            since = new Date(since).toLocaleDateString("en-GB", dateOptions);
         } else {
-            /*The value isn't an Object so just add a div with the key and value to the parent*/
-            let div = document.createElement("div");
-            div.innerHTML = "<b>" + key + "</b>: " + value;
-            parent.appendChild(div);
+            since = "Account creation";
+        }
+
+        history.innerHTML += "<b>Username: </b>" + name + "<br><b>Since: </b>" + since;
+        if(i < mc.history.length) {
+            history.innerHTML += "<hr>";
         }
     });
 }
 
 
-/*Add a collapsible, with a title, content and a parent element to append the collapsible to as a child*/
-function addCollapsible(title, content, parent){
-    /*Create the title div*/
-	let titleBar = document.createElement("div");
-	titleBar.classList.add("collapsible");
-    titleBar.innerHTML = title;
-    titleBar.addEventListener("click", collapsibleEvent);
+function isNumeric(str) {
+    return !isNaN(str) && !isNaN(parseFloat(str));
+}
 
-    /*Create the content div*/
-	let contentDiv = document.createElement("div");
-    contentDiv.classList.add("content");
-    contentDiv.innerHTML = content;
-    
-    /*Firstly add the title div and then the content div*/
-	parent.appendChild(titleBar);
-    parent.appendChild(contentDiv);
-    
-    /*Return the content div element, for if you want to add a nested collapsible into the one that was just created*/
-	return contentDiv;
+
+function addStats(stats, parent) {
+    parent.innerHTML = "";
+    Object.keys(stats).forEach(key => {
+        let value = stats[key].toString();
+        if(key.startsWith("html-")) {
+            parent.innerHTML += value;
+        } else {
+            key = key.toLowerCase().replace(/_/g, " ");
+            if(isNumeric(value)){
+                value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            if(value.startsWith("http://") || value.startsWith("https://")) {
+                parent.innerHTML += "<b>" + key.charAt(0).toUpperCase() + key.slice(1) + ": </b><a href='" + value + "' target='_blank'>Go to page</a><br>"; 
+            } else {
+                parent.innerHTML += "<b>" + key.charAt(0).toUpperCase() + key.slice(1) + ": </b>" + value + "<br>"
+            }
+        }
+    });
 }
 
 
@@ -132,64 +188,10 @@ function collapsibleEvent(){
     /*Get the content and change the max-height according to its current state, also update the max-height of its parent element*/
     let content = this.nextElementSibling;
 	if(content.style.maxHeight){
-        updateParentHeight(content, ((content.scrollHeight + 15) * -1));
 		content.style.maxHeight = null;
 	} else {
-        updateParentHeight(content, (content.scrollHeight + 15));
-		content.style.maxHeight = (content.scrollHeight + 15) + "px";
+		content.style.maxHeight = (content.scrollHeight + 35) + "px";
 	}
-}
-
-/*
-CLICK EVENT OF THE 'OPEN/CLOSE ALL' BUTTON
-*/
-function toggleCollapse(){
-	let toggle = document.getElementById("toggle");
-	let close = toggle.innerHTML == "Close All" ? true : false;
-	let collapsibles = document.getElementsByClassName("collapsible");
-	if(close){
-        /*Get all the collapsibles which are open and close them*/
-		for(let i = 0; i < collapsibles.length; i++){
-			let collapsible = collapsibles[i];
-			if(collapsible.classList.contains("active")){
-				collapsible.classList.remove("active");
-				let content = collapsible.nextElementSibling;
-				content.style.maxHeight = null;
-			}
-		}
-	} else {
-        /*Get all the collapsibles which are closed and open them*/
-		for(let i = 0; i < collapsibles.length; i++){
-			let collapsible = collapsibles[i];
-			if(!collapsible.classList.contains("active")){
-				collapsible.classList.add("active");
-                let content = collapsible.nextElementSibling;
-                updateParentHeight(content, (content.scrollHeight + 15));
-				content.style.maxHeight = (content.scrollHeight + 15) + "px";
-			}
-		}
-    }
-    
-    /*Change the text of the button*/
-	if(close){
-		toggle.innerHTML = "Open All";
-	} else {
-		toggle.innerHTML = "Close All";
-	}
-}
-
-/*Change the max-height property of the parent of a content div. Used when opening or closing a collapsible*/
-function updateParentHeight(content, height) {
-    let parent = content.parentElement;
-
-    /*Do nothing if its parent element has the id 'main', doesn't have any classes or isn't a content div from a collapsible*/
-    if(parent.id == "main" || !parent.classList || !parent.classList.contains("content")) {
-        return;
-    }
-
-    /*Update the max-height of a parent by the given amount and recursively update the parent of the current parent*/
-    parent.style.maxHeight = (parseInt(parent.style.maxHeight.replace("px", "")) + height) + "px";
-    updateParentHeight(parent, height);
 }
 
 /*Call the first function to add the listeners once all elements have loaded*/

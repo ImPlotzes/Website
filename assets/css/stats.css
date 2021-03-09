@@ -1,50 +1,66 @@
-#root {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 hr {
     border: 0;
-    border-top: 1px solid var(--main-color);
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 button {
-    background-color: #222;
+    background-color: #27292a;
     color: var(--main-color);
     border: 3px solid rgba(var(--main-color-rgb), 0.1);
     border-radius: 15px;
     font-family: inherit;
+    outline: none;
+    cursor: pointer;
 }
 
 button:hover {
     border: 3px solid rgba(var(--main-color-rgb), 0.5);
 }
 
-button:focus {
-    outline: none;
+.card {
+    background-color: #27292a;
+    border: 1px solid #2d2f30;
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 25px;
 }
 
-#toggle {
-    position: fixed;
-    font-size: 18px;
-    z-index: 1;
-    bottom: 40px;
-    right: 40px;
-    padding: 10px;
+.subheader {
+    display: block;
+    font-size: 1.4em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-decoration: underline;
+}
+
+.card hr {
+    border: none;
+    border-bottom: 1px solid gray;
+    margin: 15px 0;
+}
+
+#search-container {
+    display: none;
+    margin: 100px 15%;
+    margin-top: 75px;
+    padding: 20px;
+    width: 70%;
+    box-shadow: 2px 3px 7px 2px rgba(0, 0, 0, 0.2);
 }
 
 #player {
     font-family: inherit;
-    width: 75%;
     border: 1px solid gray;
     padding: 3px 5px;
-    background: none;
     color: lightgray;
-    box-sizing: border-box;
     font-size: 1.1em;
-    background-color: #131313;
+    background-color: #191b1d;
     outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 40px;
 }
 
 #player:hover {
@@ -58,58 +74,122 @@ button:focus {
 #search {
     display: block;
     padding: 10px;
-    width: 45%;
     font-size: 1.2em;
-    margin: 40px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    width: 100%;
 }
 
 #loading {
-    display: none;
+    display: block;
+    margin: 20% auto;
 }
 
 #main {
-    width: 80%;
-    margin-bottom: 15vh;
+    display: none;
+}
+
+#back-link {
+    position: relative;
+    top: 15px;
+    left: 20px;
+}
+
+#data {
+    display: flex;
+    justify-content: space-between;
+}
+
+#profile {
+    display: inline-block;
+    white-space: nowrap;
+    margin: 25px 20px;
+}
+
+#playername {
+    font-size: 1.5em;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+#stats {
+    flex-grow: 1;
+    margin: 25px 20px;
+    min-width: 0;
 }
 
 .collapsible {
-    position: relative;
-    z-index: 0;
-    font-size: 15px;
-    background-color: #1b1b1b;
-    padding: 15px 20px;
-    font-size: 16px;
-    color: var(--main-color);
-    margin-top: 10px;
-    border: 10px solid;
-    border-image-slice: 1;
-    border-width: 3px;
-    border-image-source: linear-gradient(to left, rgba(var(--main-color-rgb), 0.0), rgba(var(--main-color-rgb), 0.5));
+    margin-bottom: 15px;
 }
 
-.collapsible:after {
+.collapsible h3 {
+    background-color: #2d2f30;
+    padding: 15px 20px;
+    margin: 0;
+    border-radius: 5px 5px 0 0;
+    transition: border-radius 0.4s;
+}
+
+.collapsible h3:after {
     content: "\02795";
     float: right;
     margin-left: 5px;
 }
-  
-.active:after {
-    content: "\2796";
+
+.collapsible h3:not(.active) {
+    border-radius: 5px;
 }
 
-#main div:not(.collapsible, .content) {
-    margin: 15px 0;
+.collapsible h3:not(.active) + div {
+    border: 0px solid #2d2f30;
 }
 
 .content {
-    padding: 0 18px;
-    background-color: #222;
-    max-height: 0px;
+    max-height: 0;
+    padding: 0 20px;
     overflow-y: hidden;
-    margin-left: 20px;
-    margin-bottom: 10px;
-    box-shadow: inset 0px -5px 20px 0px rgb(255, 255, 255, 0.1);
-    border-radius: 0 0 10px 10px;
-    transition: max-height 0.3s ease-in;
-    white-space: nowrap;
+    transition: all 0.4s ease-in;
+    border-radius: 0 0 5px 5px;
+}
+
+.active:after {
+    content: "\2796" !important;
+}
+
+.active + .content {
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 15px;
+}
+
+thead tr {
+    font-weight: bold;
+    border-bottom: 1px solid gray;
+}
+
+tr {
+    border-bottom: 1px solid #484b4c;
+}
+
+tbody tr:first-child td {
+    padding-top: 10px;
+}
+
+td {
+    padding: 5px 0;
+}
+
+td:first-of-type {
+    font-weight: bold;
+    border-right: 1px solid #353738;
+    width: 70px;
+}
+
+td:first-of-type + td {
+    padding-left: 15px;
 }

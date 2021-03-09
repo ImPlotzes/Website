@@ -40,7 +40,6 @@
         <meta name="twitter:image" content="https://plotzes.ml/assets/images/png/leaderboard.png">
 	</head>
 	<body>
-        <div id="headerSidebar"></div>
         <div id="root">
             <div id="main">
                 <div id="loadingScreen">
@@ -53,9 +52,15 @@
                 <div id="tableContainer" style="display: none;">
                     <div id="collapsible">Selector</div>
                     <div id="content">
-                        <p onclick="showStat('k', 'Total Kills')">Total Kills</p>
                         <p onclick="showStat('w', 'Wins')">Wizards Wins</p>
+                        <p onclick="showStat('k', 'Total Kills')">Total Kills</p>
+                        <p onclick="showStat('a', 'Assists')">Total Assists</p>
+                        <p onclick="showStat('d', 'Deaths')">Total Deaths</p>
+                        <hr style="width: 100%; border: none; border-bottom: 1px solid #3f4141; margin: 5px;">
                         <p onclick="showStat('p', 'Captured Points')">Captured Points</p>
+                        <p onclick="showStat('t', 'Airtime')">Airtime</p>
+                        <p onclick="showStat('kd', 'K/D')">Kill Death Ratio</p>
+                        <hr style="width: 100%; border: none; border-bottom: 1px solid #3f4141; margin: 5px;">
                         <p onclick="showStat('a_k', 'Ancient Kills')">Ancient Kills</p>
                         <p onclick="showStat('b_k', 'Blood Kills')">Blood Kills</p>
                         <p onclick="showStat('f_k', 'Fire Kills')">Fire Kills</p>
@@ -65,22 +70,49 @@
                         <p onclick="showStat('s_k', 'Storm Kills')">Storm Kills</p>
                         <p onclick="showStat('t_k', 'Toxic Kills')">Toxic Kills</p>
                         <p onclick="showStat('w_k', 'Wither Kills')">Wither Kills</p>
-                        <p onclick="showStat('a', 'Assists')">Assists</p>
-                        <p onclick="showStat('d', 'Deaths')">Deaths</p>
-                        <p onclick="showStat('r', 'Balancer Rating')">Balancer Rating</p>
+                        <hr style="width: 100%; border: none; border-bottom: 1px solid #3f4141; margin: 5px;">
+                        <p onclick="showStat('p_r', 'Plotzes rating')">Plotzes Rating</p>
+                        <hr style="width: 100%; border: none; border-bottom: 1px solid #3f4141; margin: 5px;">
                     </div>
+                    <div id="lb-info">
+                        Total pages: --<br>
+                        Entries: --
+                    </div>
+                    <label>
+                        Entries per page: 
+                        <select id="length-selector">
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="250">250</option>
+                            <option value="999999999">Endless</option>
+                        </select>
+                    </label>
                     <input type="text" id="search" placeholder="Search for a player..">
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 7%;" onclick="sortTable(0)"># <span style="color: lightgray">&darr;</span></th>
+                                <th onclick="sortTable(0)"># <span style="color: lightgray">&darr;</span></th>
                                 <th onclick="sortTable(1)">Player <span style="color: gray">&#8597;</span></th>
-                                <th id="stat-column" style="width: 25%;" onclick="sortTable(0, 2, true)">Captured Points <span style="color: gray">&#8597;</span></th>
-                                <th style="width: 25%;" onclick="sortTable(3)">Last Update <span style="color: gray">&#8597;</span></th>
+                                <th onclick="sortTable(2)" id="stat-column">Captured Points <span style="color: gray">&#8597;</span></th>
+                                <th onclick="sortTable(3)">Last Update <span style="color: gray">&#8597;</span></th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
+                    <div id="pagination">
+                        <button onclick="pageChange(-1)">&lt;&lt;</button>
+                        <button onclick="pageChange(-2)">...</button>
+                        <button onclick="pageChange(-1)">...</button>
+                        <button id="currentPage">1</button>
+                        <button onclick="pageChange(1)">2</button>
+                        <button onclick="pageChange(2)">3</button>
+                        <button onclick="pageChange(1)">&gt;&gt;</button>
+                    </div>
+                    <label>
+                        <input id="scroll-setting" type="checkbox">
+                        Scroll to top on page change
+                    </label>
                 </div>
             </div>
         </div>
