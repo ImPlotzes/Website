@@ -40,6 +40,11 @@ div.google-visualization-tooltip {
     text-decoration: line-through;
 }
 
+.time {
+    color: gray;
+    font-style: italic;
+}
+
 .header {
     font-size: 20px;
 }

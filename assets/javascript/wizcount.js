@@ -1,6 +1,14 @@
+const dateOptions = {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZoneName: "short"
+};
+
 let chart;
 let data;
-let record = 0;
+let record = {count: 0, date: new Date(0)};
 let options = {
     colors: ["#00f0f0"],
     legend: {
@@ -90,15 +98,19 @@ async function drawChart() {
         arr.push(new Date(object.date));
         arr.push(object.count);
         formattedData.push(arr);
-        record = object.count > record ? object.count : record;
+        record = object.count > record.count ? object : record;
     });
 
     if(apiData.length == 0) {
+        document.getElementsByClassName("time")[0].innerHTML = "???";
+        document.getElementsByClassName("time")[1].innerHTML = "???";
         document.getElementById("count").innerHTML = "??";
         document.getElementById("record").innerHTML = "??";
     } else {
+        document.getElementsByClassName("time")[0].innerHTML = new Date(apiData[apiData.length - 1].date).toLocaleTimeString(undefined, dateOptions);
+        document.getElementsByClassName("time")[1].innerHTML = new Date(record.date).toLocaleTimeString(undefined, dateOptions);
         document.getElementById("count").innerHTML = apiData[apiData.length - 1].count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        document.getElementById("record").innerHTML = record.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById("record").innerHTML = record.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     data = new google.visualization.DataTable();
     data.addColumn("datetime", "Time");
@@ -126,6 +138,7 @@ async function updateChartData() {
     document.getElementById("update").disabled = true;
     let apiData = await fetch("https://wizcount.plotzes.ml");
     apiData = await apiData.json();
+    document.getElementsByClassName("time")[0].innerHTML = new Date(apiData[apiData.length - 1].date).toLocaleTimeString(undefined, dateOptions);
     document.getElementById("count").innerHTML = apiData[apiData.length - 1].count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     let lastDate = data.getValue(data.getNumberOfRows() - 1, 0);
     let newRows = [];
@@ -136,10 +149,11 @@ async function updateChartData() {
             arr.push(date);
             arr.push(object.count);
             newRows.push(arr);
-            record = object.count > record ? object.count : record;
+            record = object.count > record.count ? object : record;
         }
     });
-    document.getElementById("record").innerHTML = record.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    document.getElementsByClassName("time")[1].innerHTML = new Date(record.date).toLocaleTimeString(undefined, dateOptions);
+    document.getElementById("record").innerHTML = record.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     data.insertRows(data.getNumberOfRows(), newRows);
     var date_formatter = new google.visualization.DateFormat({ 
         pattern: "MMM dd, HH:mm:ss"

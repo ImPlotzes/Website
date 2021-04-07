@@ -58,6 +58,7 @@ async function loadPlayer(player) {
     if(success) {
         document.getElementById("main").style.display = "block";
     } else {
+        document.getElementById("player").value = player;
         document.getElementById("search-container").style.display = "inline-block";
     }
 } 
@@ -79,7 +80,12 @@ function showData(json){
     if(JSON.stringify(json.data.profile.social) == "{}") {
         document.getElementById("profile-social").innerHTML = "<b>No social media connected</b>";
     } else {
-        addStats(json.data.profile.social, document.getElementById("profile-social"));
+        let socials = {};
+        for(let [key, value] of Object.entries(json.data.profile.social)) {
+            socials[key.charAt(0) + key.slice(1).toLowerCase()] = value;
+        }
+        console.log(socials);
+        addStats(socials, document.getElementById("profile-social"));
     }
     
     /*Fill the Wizards stats*/
@@ -164,7 +170,7 @@ function addStats(stats, parent) {
         if(key.startsWith("html-")) {
             parent.innerHTML += value;
         } else {
-            key = key.toLowerCase().replace(/_/g, " ");
+            key = key.replace(/_/g, " ");
             if(isNumeric(value)){
                 value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
