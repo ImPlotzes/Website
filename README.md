@@ -20,62 +20,13 @@
 ## TNT Wizards
  ### Stats
  [Link](https://plotzes.ml/stats)  
- This page can show you account information of a player and also their TNT Wizards statistics. These are the currently available statistics:
- - Username: [USERNAME]
- - **Account information**
-  - Account creation date: [DD/MM/YYYY] or "Couldn't accurately approximate account creation date"
-  - UUID: [UUID]
-  - **Username history**
-    - Username: [USERNAME]
-    - Since: ----
-    - =====================================
-    - Username: [USERNAME]
-    - Since: [TIME IN LOCAL FORMAT]
-    - =====================================
-    - *etc.*
-  - **Skin**
-    - Custom skin: [BOOLEAN]
-    - Slim: [BOOLEAN]
-    - URL: http://textures.minecraft.net/texture/[RANDOM-CHARACTERS]
- - **Wizards statistics**
-  - Total Kills: [NUMBER]
-  - Total Deaths: [NUMBER]
-  - Total Assists: [NUMBER]
-  - Kill Death ratio: [NUMBER]
-  - Wins: [NUMBER]
-  - Selected class: [CLASS] Wizard
-  - **General**
-    - Captured points: [NUMBER]
-    - Air time: [NUMBER] hours, [NUMBER] minutes, [NUMBER] seconds
-    - TNT Games coins: [NUMBER]
-    - TNT Games playtime: [NUMBER] hours, [NUMBER] minutes
-  - **Settings**
-    - Show tip holograms: [BOOLEAN]
-    - Show cooldown notifications: [BOOLEAN]
-    - Show prestige cosmetics: [BOOLEAN]
-    - Show actionbar: [BOOLEAN]
-  - **Classes**
-    - **[CLASS]**
-      - Kills: [NUMBER]
-      - Deaths: [NUMBER]
-      - Assists: [NUMBER]
-      - Kill Death ratio: [NUMBER]
-      - Hearts healed: [NUMBER]
-      - Damage taken: [NUMBER]
-      - Power level: [NUMBER]/6
-      - Mana regen level: [NUMBER]/6
-      - Prestige: [BOOLEAN]
-    - **[CLASS]**
-      - Kills: [NUMBER]
-      - Deaths: [NUMBER]
-      - Assists: [NUMBER]
-      - Kill Death ratio: [NUMBER]
-      - Hearts healed: [NUMBER]
-      - Damage taken: [NUMBER]
-      - Power level: [NUMBER]/6
-      - Mana regen level: [NUMBER]/6
-      - Prestige: [BOOLEAN]
-    - *etc.*
+ This page shows you a neat overview of someone's account. It gives you a small profile card at the right hand side with information such as their first and last login time, network level and XP information, daily reward information and much more. It also has three collapsibles with information about Wizards stats, TNT Games stats and Minecraft account stats. The Wizards stats page has an incredible useful table of all stats per class. 
+ 
+ ![image](https://user-images.githubusercontent.com/47643346/113931776-2778b000-97f3-11eb-9a50-27ec3107c28a.png)
+ <i>Example of table</i>
+
+ In the TNT Games collapsible you can find a lot of stats about the TNT Games as a whole. This includes their selected cosmetics, winstreak and playtime for example.
+ The Minecraft account collapsible has information about the Minecraft account itself, so not related to Hypixel in any way. A few of the things you can find here is their UUID, if they have a custom skin and their username history for example. 
 <br />
 <br />
 
@@ -87,10 +38,14 @@
 
  ### Leaderboard
  [Link](https://plotzes.ml/leaderboard)  
- Every player who gets entered in the [stats page](https://plotzes.ml/stats) with TNT Wizards stats will get added to the leaderboard. It currently has over 270 entries. You can order the leaderboard based on different TNT Wizards stats. Currently you can order by the following stats:
-  - Total Kills (default)
-  - Wizards Wins
+ Every player who gets entered in the [stats page](https://plotzes.ml/stats) with TNT Wizards stats will get added to the leaderboard. It currently has over 3,200 entries. You can order the leaderboard based on different TNT Wizards stats. Currently you can order by the following stats:
+  - Wizards Wins (default)
+  - Total Kills
+  - Total Assists
+  - Total Deaths
   - Captured Points
+  - Airtime
+  - Kill Death Ratio
   - Ancient Kills
   - Blood Kills
   - Fire Kills
@@ -99,6 +54,8 @@
   - Kinetic Kills
   - Storm Kills
   - Toxic Kills
+  - Wither Kills
+  - Plotzes Rating
 
  The leaderboard is a table that exists of four columns. The first column is a number that shows you the rank of the player. The second column is the player name. If you click on the name then you will go to their stats page. The third column will show the select stat from the selector. The fourth, and last, column shows you the time since their last update. If you want to update someone's position on the leaderboard then you only have to go to their stats page. Every 30 minutes, between 12:00 UTC and 23:59 UTC, it will automatically update the stats of the five players who've been updated the longest ago.
 <br />
