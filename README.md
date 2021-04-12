@@ -31,7 +31,7 @@
 <br />
 
  ### Player count
- [Link](https://plotzes.ml/wizcount)  
+ [Link](https://plotzes.ml/playercount)  
  This page will show you the current amount of players who are playing TNT Wizards. It will also show you the player count history recorded at the database nearest to you in a neat resizable graph.
 <br />
 <br />
