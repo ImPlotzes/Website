@@ -57,7 +57,7 @@
   - Wither Kills
   - Plotzes Rating
 
- The leaderboard is a table that exists of four columns. The first column is a number that shows you the rank of the player. The second column is the player name. If you click on the name then you will go to their stats page. The third column will show the select stat from the selector. The fourth, and last, column shows you the time since their last update. If you want to update someone's position on the leaderboard then you only have to go to their stats page. Every minute 10 people are updated automatically. They're the 10 players that were updated the longest ago. This means that, with ~3,400 entries, a full update rotation happens every 5h and 40m or so. 
+ The leaderboard is a table that exists of four columns. The first column is a number that shows you the rank of the player. The second column is the player name. If you click on the name then you will go to their stats page. The third column will show the select stat from the selector. The fourth, and last, column shows you the time since their last update. If you want to update someone's position on the leaderboard then you only have to go to their stats page. Every minute 4 people are updated automatically. They're the 4 players that were updated the longest ago. This means that, with ~3,400 entries, a full update rotation happens every 14h and 10m or so. 
 <br />
 <br />
 
