@@ -40,7 +40,7 @@
 
  ### Leaderboard
  [Link](https://www.plotzes.ml/leaderboard)  
- Every player who gets entered in the [stats page](https://plotzes.ml/stats) with TNT Wizards stats will get added to the leaderboard. It currently has over 3,600 entries. You can order the leaderboard based on different TNT Wizards stats. Currently you can order by the following stats:
+ Every player who gets entered in the [stats page](https://plotzes.ml/stats) with TNT Wizards stats will get added to the leaderboard. It currently has over 6,200 entries. You can order the leaderboard based on different TNT Wizards stats. Currently you can order by the following stats:
   - Wizards Wins (default)
   - Total Kills
   - Total Assists
@@ -60,7 +60,7 @@
   - Wither Kills
   - Plotzes Rating
 
- The leaderboard is a table that exists of four columns. The first column is a number that shows you the rank of the player. The second column is the player name. If you click on the name then you will go to their stats page. The third column will show the select stat from the selector. The fourth, and last, column shows you the time since their last update. If you want to update someone's position on the leaderboard then you only have to go to their stats page. Every minute, 3 people are updated automatically. They're the 3 players that were updated the longest ago. This means that, with ~3,700 entries, a full update rotation happens every 20h and 30m or so. 
+ The leaderboard is a table that exists of four columns. The first column is a number that shows you the rank of the player. The second column is the player name. If you click on the name then you will go to their stats page. The third column will show the select stat from the selector. The fourth, and last, column shows you the time since their last update. If you want to update someone's position on the leaderboard then you only have to go to their stats page. Every minute, 3 people are updated automatically. They're the 3 players that were updated the longest ago. This means that, with ~6,300 entries, a full update rotation happens every 1 day and 11 hours or so. 
 <br />
 <br />
 
