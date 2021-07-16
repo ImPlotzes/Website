@@ -14,20 +14,32 @@ let currentStat = {
     displayname: "Total Kills"
 }
 
+let leaderboardLoaded = false;
+async function innitLeaderboard() {
+    lb = await fetch("https://leaderboard.plotzes.ml");
+    lb = await lb.json();
+    lbData = lb.lb_data;
+    leaderboardLoaded = true;
+}
+innitLeaderboard();
+
 
 async function afterLoad() {
-    let success = await getLeaderboard();
-    if(success) {
-        document.getElementById("search").addEventListener("keyup", searchPlayer);
-        document.getElementById("length-selector").addEventListener("change", changePageLength);
-    }
+    let interval = setInterval(async () => {
+        if(leaderboardLoaded) {
+            clearInterval(interval);
+            let success = await getLeaderboard();
+            if(success) {
+                document.getElementById("search").addEventListener("keyup", searchPlayer);
+                document.getElementById("length-selector").addEventListener("change", changePageLength);
+            }
+        }
+    }, 1);
 }
 
 
 async function getLeaderboard() {
-    lb = await fetch("https://leaderboard.plotzes.ml");
-    lb = await lb.json();
-    lbData = lb.lb_data;
+    
     if(lb.success) {
         showStat("w", "Wins");
         return true;

@@ -256,14 +256,14 @@ Only for sidebar
 }
 
 #pages {
-    margin-top: 70px;
+    margin-top: 50px;
     min-width: 230px;
 }
 
 #pages a, #pages .sidebar-collapsible {
     display: block;
     margin: 10px;
-    font-size: 24px;
+    font-size: 22px;
     background-color: transparent;
     border: none;
     color: lightgray;
@@ -293,7 +293,7 @@ Only for sidebar
 }
 
 #pages .sidebar-collapsible:hover .sidebar-content {
-    max-height: 161.2px;
+    max-height: 230px;
 }
 
 #pages .sidebar-collapsible-active .sidebar-content {
@@ -303,8 +303,8 @@ Only for sidebar
 #pages .sidebar-collapsible svg {
     display: inline-block;
     position: relative;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     top: 5px;
     left: 5px;
     transform: rotate(-90deg);

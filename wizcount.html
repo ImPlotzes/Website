@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-        <title>Hypixel TNT Wizards Player Count</title> <!-- Title desplayed in browser tab -->
+        <title>OLD URL</title> <!-- Title desplayed in browser tab -->
         <link rel="icon" type="image/svg" href="/assets/images/svg/icon-blue.svg">
 
 
@@ -10,61 +10,52 @@
         <link rel="stylesheet" href="/assets/css/header-sidebar.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap">
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link rel="stylesheet" href="/assets/css/wizcount.css">
 
 
         <!-- JS -->
-        <script src="/assets/javascript/wizcount.js"></script>
         <script src="/assets/javascript/header-sidebar.js"></script>
         <script src="https://www.gstatic.com/charts/loader.js"></script>
 
 
         <!-- META  -->
-        <meta name="pagename" content="wizcount">  <!-- The name of the page-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-
-        <meta name="description" content="A useful Hypixel TNT Wizards player count viewer. Get the current Wizards player count and look at the previously recorded player counts."> <!-- Description -->
+        <meta name="description" content="THIS IS AN OUTDATED URL AND WILL BE REMOVED SOON! GO TO 'https://www.plotzes.ml/playercount' FOR THE NEW LINK"> <!-- Description -->
         <meta name="theme-color" content="#00f0f0">
 
-        <meta property="og:url" content="https://plotzes.ml/wizcount"> <!-- URL to page -->
+        <meta property="og:url" content="https://plotzes.ml/playercount"> <!-- URL to page -->
         <meta property="og:type" content="website">
         <meta property="og:title" content="Hypixel TNT Wizards Player Count"> <!-- Title of the page-->
         <meta property="og:site_name" content="Plotzes">
-        <meta property="og:description" content="A useful Hypixel TNT Wizards player count viewer. Get the current Wizards player count and look at the previously recorded player counts."> <!-- Description -->
-        <meta property="og:image" content="https://plotzes.ml/assets/images/png/wizcount.png"> <!-- Image to use -->
+        <meta property="og:description" content="THIS IS AN OUTDATED URL AND WILL BE REMOVED SOON! GO TO 'https://www.plotzes.ml/playercount' FOR THE NEW LINK"> <!-- Description -->
+        <meta property="og:image" content="https://plotzes.ml/assets/images/png/playercount.png"> <!-- Image to use -->
         <meta property="og:image:type" content="/assets/image/png">
 
 
         <meta name="twitter:card" content="summary_large_image">
         <meta property="twitter:domain" content="plotzes.ml">
-        <meta property="twitter:url" content="https://plotzes.ml/wizcount"> <!-- URL to page -->
+        <meta property="twitter:url" content="https://plotzes.ml/playercount"> <!-- URL to page -->
         <meta name="twitter:title" content="Hypixel TNT Wizards Player Count"> <!-- Title of the page -->
-        <meta name="twitter:description" content="A useful Hypixel TNT Wizards player count viewer. Get the current Wizards player count and look at the previously recorded player counts."> <!-- Description -->
-        <meta name="twitter:image" content="https://plotzes.ml/assets/images/png/wizcount.png"> <!-- Image to use -->
+        <meta name="twitter:description" content="THIS IS AN OUTDATED URL AND WILL BE REMOVED SOON! GO TO 'https://www.plotzes.ml/playercount' FOR THE NEW LINK"> <!-- Description -->
+        <meta name="twitter:image" content="https://plotzes.ml/assets/images/png/playercount.png"> <!-- Image to use -->
 	</head>
 	<body>
-        <div id="root">
-            <div id="chart" style="width: 100%; height: 450px;">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200px" height="200px" viewBox="0 0 100 100">
-                    <path fill="none" stroke="var(--main-color)" stroke-width="8" stroke-dasharray="174.48047119140625 82.10845703125" d="M24.3 30C11.4 30 5 43.3 5 50s6.4 20 19.3 20c19.3 0 32.1-40 51.4-40 C88.6 30 95 43.3 95 50s-6.4 20-19.3 20C56.4 70 43.6 30 24.3 30z" stroke-linecap="round" style="transform-origin:50px 50px">
-                        <animate attributeName="stroke-dashoffset" repeatCount="indefinite" dur="2s" keyTimes="0;1" values="0;256.58892822265625"></animate>
-                    </path>
-                </svg>
-            </div>
-            <hr style="width: 80%; border: none; border-bottom: 1px solid #3f4141; margin: 15px auto">
-            <div id="info">
-                <button id="update">Update</button>
-                <div>
-                    <div class="time">------</div>
-                    <div class="header"><b>Player count:</b></div>
-                    <div id="count" class="content">...</div>
-                </div>
-                <div>
-                    <div class="time">------</div>
-                    <div class="header"><b>Record in past 48h:</b></div>
-                    <div id="record" class="content">...</div>
-                </div>
+        <div id="root" style="text-align: center;">
+            <div style="margin-top: 20vh;">
+                <h1 style="color: var(--main-color)">This is an outdated URL. You'll be redirected in 5 seconds.</h1>
+                <h1 id="count">-</h1>
+                <script>
+                    function redirect() {
+                        let i = 5;
+                        setInterval(() => {
+                            document.getElementById("count").innerHTML = i;
+                            if(i-- <= 0) {
+                                window.location = window.location.origin + "/playercount";
+                            }
+                        }, 1000);
+                    }
+                    window.addEventListener("load", redirect);
+                </script>
             </div>
         </div>
 	</body>

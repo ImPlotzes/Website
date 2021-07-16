@@ -20,7 +20,7 @@ html {
 }
 
 #collapsible:hover + #content, #content:hover {
-    max-height: 344px;
+    max-height: 374px;
     border: 1px gray solid;
     border-top: 1px rgba(0, 0, 0, 0) solid;
 }

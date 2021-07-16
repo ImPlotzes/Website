@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-        <title>Player Stats</title> <!-- Title desplayed in browser tab -->
+        <title>TNT Games Player Stats</title> <!-- Title desplayed in browser tab -->
         <link rel="icon" type="image/svg" href="/assets/images/svg/icon-blue.svg">
 
 
@@ -21,7 +21,7 @@
         <!-- META  -->
         <meta name="pagename" content="stats">  <!-- The name of the page-->
 
-        <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <meta name="description" content="Get all the Minecraft account information of a player and their Hypixel TNT Games statistics! It's all ordered in a useful and clean collapsible list."> <!-- Description -->
         <meta name="theme-color" content="#00f0f0">
@@ -58,6 +58,48 @@
                     <animate attributeName="stroke-dashoffset" repeatCount="indefinite" dur="2s" keyTimes="0;1" values="0;256.58892822265625"></animate>
                 </path>
             </svg>
+            <div id="loadingTemplate">
+                <div class="loadingCard" style="width: 360px; height: 575px; margin: 25px 20px;">
+                    <h1 class="loadingText" style="width: 250px; height: 40px; margin-bottom: 40px;"></h1>
+                    <hr />
+                    <h1 class="loadingText" style="width: 200px;"></h1>
+                    <h1 class="loadingText" style="width: 187px;"></h1>
+                    <h1 class="loadingText" style="width: 150px;"></h1>
+                    <br />
+                    <h1 class="loadingText" style="width: 169px;"></h1>
+                    <h1 class="loadingText" style="width: 137px;"></h1>
+                    <h1 class="loadingText" style="width: 163px;"></h1>
+                    <h1 class="loadingText" style="width: 168px;"></h1>
+                    <br />
+                    <h1 class="loadingText" style="width: 185px;"></h1>
+                    <h1 class="loadingText" style="width: 123px;"></h1>
+                    <h1 class="loadingText" style="width: 194px;"></h1>
+                    <h1 class="loadingText" style="width: 142px;"></h1>
+                </div>
+                <div style="flex-grow: 1; padding-top: 25px; margin: 0 20px;">
+                    <div class="loadingCollapsible">
+                        <h3 style="width: 100px;"></h3>
+                    </div>
+                    <div class="loadingCollapsible">
+                        <h3 style="width: 95px;"></h3>
+                    </div>
+                    <div class="loadingCollapsible">
+                        <h3 style="width: 80px;"></h3>
+                    </div>
+                    <div class="loadingCollapsible">
+                        <h3 style="width: 75px;"></h3>
+                    </div>
+                    <div class="loadingCollapsible">
+                        <h3 style="width: 80px;"></h3>
+                    </div>
+                    <div class="loadingCollapsible">
+                        <h3 style="width: 70px;"></h3>
+                    </div>
+                    <div class="loadingCollapsible">
+                        <h3 style="width: 155px;"></h3>
+                    </div>
+                </div>
+            </div>
             <div id="main">
                 <a href="/stats" id="back-link">&#8592; &nbsp; Go back</a>
                 <div id="data">
@@ -73,7 +115,42 @@
                     </div>
                     <div id="stats">
                         <div class="collapsible">
-                            <h3>Wizards stats</h3>
+                            <h3>TNT Games</h3>
+                            <div class="content card">
+                                <div id="tnt-stats"></div>
+                                <hr>
+                                <span class="subheader">TNT Games settings</span>
+                                <div class="card">
+                                    <div id="tnt-settings"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapsible">
+                            <h3>Bow Spleef</h3>
+                            <div class="content card">
+                                <div id="bow-stats"></div>
+                            </div>
+                        </div>
+                        <div class="collapsible">
+                            <h3>TNT Run</h3>
+                            <div class="content card">
+                                <div id="run-stats"></div>
+                            </div>
+                        </div>
+                        <div class="collapsible">
+                            <h3>PVP Run</h3>
+                            <div class="content card">
+                                <div id="pvp-stats"></div>
+                            </div>
+                        </div>
+                        <div class="collapsible">
+                            <h3>TNT Tag</h3>
+                            <div class="content card">
+                                <div id="tag-stats"></div>
+                            </div>
+                        </div>
+                        <div class="collapsible">
+                            <h3>Wizards</h3>
                             <div class="content card">
                                 <div id="wiz-stats"></div>
                                 <hr>
@@ -210,18 +287,7 @@
                             </div>
                         </div>
                         <div class="collapsible">
-                            <h3>TNT Games stats</h3>
-                            <div class="content card">
-                                <div id="tnt-stats"></div>
-                                <hr>
-                                <span class="subheader">TNT Games settings</span>
-                                <div class="card">
-                                    <div id="tnt-settings"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="collapsible">
-                            <h3>Minecraft account stats</h3>
+                            <h3>Minecraft account</h3>
                             <div class="content card">
                                 <div id="mc-stats"></div>
                                 <hr>

@@ -1,0 +1,78 @@
+#root {
+    text-align: center;
+}
+
+#chart * {
+    margin: 0 auto;
+}
+
+div.google-visualization-tooltip {
+    background-color: #27292a;
+    box-shadow: 5px 5px 25px 0 rgba(0, 0, 0, 0.75);
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 50px 20px 50px;
+}
+
+#controls * {
+    display: inline-block;
+    width: fit-content;
+}
+
+#info {
+    margin-top: 50px;
+}
+
+#info > * {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #3f4141;
+    width: 70%;
+    margin: 5px auto;
+    padding: 5px 0;
+}
+
+#info > * > * {
+    width: 30%;
+}
+
+#update {
+    background-color: #222;
+    color: var(--main-color);
+    border: 3px solid rgba(var(--main-color-rgb), 0.1);
+    border-radius: 15px;
+    font-family: inherit;
+    padding: 10px 15px;
+    font-size: 18px;
+    outline: none;
+}
+
+#update:hover {
+    border: 3px solid rgba(var(--main-color-rgb), 0.5);
+}
+
+#update:disabled {
+    color: rgba(var(--main-color-rgb), 0.5);
+    text-decoration: line-through;
+}
+
+.time {
+    color: gray;
+    font-style: italic;
+}
+
+.header {
+    font-size: 18px;
+}
+
+.content {
+    font-size: 36px;
+}

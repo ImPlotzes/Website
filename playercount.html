@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+	<head>
+        <title>TNT Games Player Count</title> <!-- Title desplayed in browser tab -->
+        <link rel="icon" type="image/svg" href="/assets/images/svg/icon-blue.svg">
+
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="/assets/css/core.css">
+        <link rel="stylesheet" href="/assets/css/header-sidebar.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="stylesheet" href="/assets/css/playercount.css">
+
+
+        <!-- JS -->
+        <script src="/assets/javascript/playercount.js"></script>
+        <script src="/assets/javascript/header-sidebar.js"></script>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+        <!-- META  -->
+        <meta name="pagename" content="playercount">  <!-- The name of the page-->
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="Get the live playercount from all TNT Games. Including a useful chart showcasing the playercount of every game in the last 48h. Also find out what the highest playercount was in the past 48h."> <!-- Description -->
+        <meta name="theme-color" content="#00f0f0">
+
+        <meta property="og:url" content="https://plotzes.ml/playercount"> <!-- URL to page -->
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Hypixel TNT Games Player Count"> <!-- Title of the page-->
+        <meta property="og:site_name" content="Plotzes">
+        <meta property="og:description" content="Get the live playercount from all TNT Games. A useful chart showcasing the playercount of every game in the last 48h. Also find out what the highest playercount was in the past 48h."> <!-- Description -->
+        <meta property="og:image" content="https://plotzes.ml/assets/images/png/playercount.png"> <!-- Image to use -->
+        <meta property="og:image:type" content="/assets/image/png">
+
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta property="twitter:domain" content="plotzes.ml">
+        <meta property="twitter:url" content="https://plotzes.ml/playercount"> <!-- URL to page -->
+        <meta name="twitter:title" content="Hypixel TNT Games Player Count"> <!-- Title of the page -->
+        <meta name="twitter:description" content="Get the live playercount from all TNT Games. A useful chart showcasing the playercount of every game in the last 48h. Also find out what the highest playercount was in the past 48h."> <!-- Description -->
+        <meta name="twitter:image" content="https://plotzes.ml/assets/images/png/playercount.png"> <!-- Image to use -->
+	</head>
+	<body>
+        <div id="root">
+            <div id="chart" style="width: 100%; height: 70vh;">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200px" height="200px" viewBox="0 0 100 100">
+                    <path fill="none" stroke="var(--main-color)" stroke-width="8" stroke-dasharray="174.48047119140625 82.10845703125" d="M24.3 30C11.4 30 5 43.3 5 50s6.4 20 19.3 20c19.3 0 32.1-40 51.4-40 C88.6 30 95 43.3 95 50s-6.4 20-19.3 20C56.4 70 43.6 30 24.3 30z" stroke-linecap="round" style="transform-origin:50px 50px">
+                        <animate attributeName="stroke-dashoffset" repeatCount="indefinite" dur="2s" keyTimes="0;1" values="0;256.58892822265625"></animate>
+                    </path>
+                </svg>
+            </div>
+            <hr style="width: 80%; border: none; border-bottom: 1px solid #3f4141; margin: 0 auto 15px auto">
+            <div id="controls">
+                <div>
+                    <label>Bow Spleef</label>
+                    <input type="checkbox" onclick="toggleColumn(1)" checked>
+                </div>
+                <div>
+                    <label>TNT Run</label>
+                    <input type="checkbox" onclick="toggleColumn(2)" checked>
+                </div>
+                <div>
+                    <label>PVP Run</label>
+                    <input type="checkbox" onclick="toggleColumn(3)" checked>
+                </div>
+                <div>
+                    <label>TNT Tag</label>
+                    <input type="checkbox" onclick="toggleColumn(4)" checked>
+                </div>
+                <div>
+                    <label>Wizards</label>
+                    <input type="checkbox" onclick="toggleColumn(5)" checked>
+                </div>
+                <div>
+                    <label>Total</label>
+                    <input type="checkbox" onclick="toggleColumn(6)" checked>
+                </div>
+            </div>
+            <p id="time" style="color: gray; font-style: italic; margin-bottom: 0;">--------</p>
+            <button id="update">Update</button>
+            <div id="info">
+                <div>
+                    <h1>Bowspleef</h1>
+                    <div>
+                        <div class="header"><b>Player count:</b></div>
+                        <div class="content count">...</div>
+                    </div>
+                    <div>
+                        <div class="time">------</div>
+                        <div class="header"><b>Record in past 48h:</b></div>
+                        <div class="content record">...</div>
+                    </div>
+                </div>
+                <div>
+                    <h1>TNT Run</h1>
+                    <div>
+                        <div class="header"><b>Player count:</b></div>
+                        <div class="content count">...</div>
+                    </div>
+                    <div>
+                        <div class="time">------</div>
+                        <div class="header"><b>Record in past 48h:</b></div>
+                        <div class="content record">...</div>
+                    </div>
+                </div>
+                <div>
+                    <h1>PVP Run</h1>
+                    <div>
+                        <div class="header"><b>Player count:</b></div>
+                        <div class="content count">...</div>
+                    </div>
+                    <div>
+                        <div class="time">------</div>
+                        <div class="header"><b>Record in past 48h:</b></div>
+                        <div class="content record">...</div>
+                    </div>
+                </div>
+                <div>
+                    <h1>TNT Tag</h1>
+                    <div>
+                        <div class="header"><b>Player count:</b></div>
+                        <div class="content count">...</div>
+                    </div>
+                    <div>
+                        <div class="time">------</div>
+                        <div class="header"><b>Record in past 48h:</b></div>
+                        <div class="content record">...</div>
+                    </div>
+                </div>
+                <div>
+                    <h1>Wizards</h1>
+                    <div>
+                        <div class="header"><b>Player count:</b></div>
+                        <div class="content count">...</div>
+                    </div>
+                    <div>
+                        <div class="time">------</div>
+                        <div class="header"><b>Record in past 48h:</b></div>
+                        <div class="content record">...</div>
+                    </div>
+                </div>
+                <div>
+                    <h1>Total</h1>
+                    <div>
+                        <div class="header"><b>Player count:</b></div>
+                        <div class="content count">...</div>
+                    </div>
+                    <div>
+                        <div class="time">------</div>
+                        <div class="header"><b>Record in past 48h:</b></div>
+                        <div class="content record">...</div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+	</body>
+</html>

@@ -14,11 +14,11 @@ function loadEvents() {
     /*Check if page loaded with player in URL*/
     const params = (new URL(document.location)).searchParams;
     const player = params.get("player") || document.location.pathname.replace("/stats", "").replace("/", "");
+    document.getElementById("loading").style.display = "none";
 	if(player != "" && player) {
         loadPlayer(player);
     } else {
         document.getElementById("search-container").style.display = "inline-block";
-        document.getElementById("loading").style.display = "none";
     }
 }
 
@@ -43,18 +43,19 @@ CLICK EVENT OF SEARCH BUTTON
 function showStats() {
     /*Get the player and go to the stats page*/
 	let player = document.getElementById("player").value;
-    console.log(window.location.host);
 	window.location.href = window.location.origin + "/stats/" + player;
 }
 
 
 
 async function loadPlayer(player) {
+    document.getElementById("loadingTemplate").style.display = "flex";
+
     /*Get the player data and then show it*/
     let data = await fetch("https://stats.plotzes.ml?user=" + player);
     data = await data.json();
     let success = showData(data);
-    document.getElementById("loading").style.display = "none";
+    document.getElementById("loadingTemplate").style.display = "none";
     if(success) {
         document.getElementById("main").style.display = "block";
     } else {
@@ -84,9 +85,20 @@ function showData(json){
         for(let [key, value] of Object.entries(json.data.profile.social)) {
             socials[key.charAt(0) + key.slice(1).toLowerCase()] = value;
         }
-        console.log(socials);
         addStats(socials, document.getElementById("profile-social"));
     }
+
+    /*Fill the Bow Spleef stats */
+    addStats(json.data.bow, document.getElementById("bow-stats"));
+
+    /*Fill the TNT Run stats */
+    addStats(json.data.run, document.getElementById("run-stats"));
+
+    /*Fill the PVP Run stats */
+    addStats(json.data.pvp, document.getElementById("pvp-stats"));
+
+    /*Fill the TNT Tag stats */
+    addStats(json.data.tag, document.getElementById("tag-stats"));
     
     /*Fill the Wizards stats*/
     showWizStats(json.data.wiz);

@@ -112,10 +112,6 @@ function selectTheme(color) {
     const root = document.documentElement;
     root.style.setProperty("--main-color", "#" + color);
     root.style.setProperty("--main-color-rgb", hexToRgb(color));
-
-    try {
-        updateChartColor(color);
-    } catch(e) {}
 }
 
 
@@ -138,7 +134,14 @@ function collapse() {
     }
     setTimeout(() => {
         try {
-            chart.draw(data, options);
+            options.colors = [...allColours];
+            for(let i = 0; i < hiddenColumns.length; i++) {
+                let colourIndex = hiddenColumns[i] - 1;
+                options.colors.splice(options.colors.indexOf(allColours[colourIndex]), 1);
+            }
+            let view = new google.visualization.DataView(data);
+            view.hideColumns(hiddenColumns);
+            chart.draw(view, options);
         } catch(e) {}
     }, 200);
 }
