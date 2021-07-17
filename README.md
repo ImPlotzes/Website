@@ -42,7 +42,7 @@
  ### Images
   [Link](https://www.plotzes.ml/images)  
   This page explains the dynamic image service I'm providing. Dynamic images are images which shows you the stats of a user based on the URL of the image. The stats in the picture get automatically updated when the image is loading. It does use server-side caching so the stats might be a few hours behind but never more than 24 hours. You can use these links to get an image in your forum signature that is always up to date with your stats. 
-  ![image](https://user-images.githubusercontent.com/47643346/126046434-e6797453-212a-40be-b1ec-98286cef61a0.png)
+  ![image](https://user-images.githubusercontent.com/47643346/126047741-d1fdbcfe-cb8e-4681-99e8-3b165d3bc54b.png)
 <br />
 <br />
 
