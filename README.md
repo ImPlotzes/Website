@@ -6,6 +6,7 @@
  - TNT Games
 	 - Stats
 	 - Player count
+	 - Images
 	 - Wizards Leaderboards
  - About
  - Contact
@@ -32,13 +33,20 @@
 <br />
 
  ### Player count
- [Link](https://www.otzes.ml/playercount)  
+ [Link](https://www.plotzes.ml/playercount)  
  This page will show you the current amount of players who are playing TNT Games in total, and each game separately. It has a zoomable chart that shows the history of each game up to 48h back.
  ![image](https://user-images.githubusercontent.com/47643346/117438663-22159f00-af32-11eb-9aeb-3e97c393c12e.png)
 <br />
 <br />
 
- ### Leaderboard
+ ### Images
+  [Link](https://www.plotzes.ml/images)  
+  This page explains the dynamic image service I'm providing. Dynamic images are images which shows you the stats of a user based on the URL of the image. The stats in the picture get automatically updated when the image is loading. It does use server-side caching so the stats might be a few hours behind but never more than 24 hours. You can use these links to get an image in your forum signature that is always up to date with your stats. 
+  ![image](https://user-images.githubusercontent.com/47643346/126046434-e6797453-212a-40be-b1ec-98286cef61a0.png)
+<br />
+<br />
+
+ ### Wizards Leaderboard
  [Link](https://www.plotzes.ml/leaderboard)  
  Every player who gets entered in the [stats page](https://plotzes.ml/stats) with TNT Wizards stats will get added to the leaderboard. It currently has over 6,200 entries. You can order the leaderboard based on different TNT Wizards stats. Currently you can order by the following stats:
   - Wizards Wins (default)
