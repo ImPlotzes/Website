@@ -70,14 +70,14 @@ function customColor() {
 
 
 async function loadHeaderSidebar() {
-    /*
+    ///*
     let request = await fetch("/assets/html/header-sidebar.html");
     let div = document.createElement("div");
     div.innerHTML = await request.text();
     div.childNodes.forEach(child => {
         document.body.appendChild(child);
     })
-    */
+    //*/
 
     let pagename = document.querySelector('meta[name="pagename"]');
     if(!pagename) {
