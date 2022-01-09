@@ -8,6 +8,7 @@ const dateOptions = {
 
 const allColours = ["#ff4242", "#ffff00", "#03ee03", "#00f0f0", "#a06eff", "#ffffff"];
 let hiddenColumns = [];
+let lastUpdateTime;
 let chart;
 let data;
 let record = [
@@ -20,6 +21,8 @@ let record = [
 ];
 let options = {
     colors: [...allColours],
+    width: "100%",
+    height: "75%",
     legend: {
         position: "top",
         textStyle: {
@@ -54,6 +57,10 @@ let options = {
             }
         }
     },
+    chartArea: {
+        width: "90%",
+        height: "75%",
+    },
     vAxis: {
         title: "Player Count",
         baseline: 0,
@@ -66,10 +73,6 @@ let options = {
         gridlines: {
             color: "none"
         }
-    },
-    chartArea: {
-        width: "90%",
-        height: "75%"
     },
     tooltip: {
         isHtml: true,
@@ -99,13 +102,34 @@ function loader() {
     document.getElementById("update").addEventListener("click", updateChartData);
 
     google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);    
+    google.charts.setOnLoadCallback(drawChart);
+
+    const timeElement = document.getElementById("time");
+    setInterval(() => {
+        if(lastUpdateTime) {
+            const timeDiff = Date.now() - lastUpdateTime;
+            const minutes = Math.floor(timeDiff / 60000);
+            const seconds = ((timeDiff % 60000) / 1000).toFixed(0);
+            timeElement.innerHTML = "Last update: " + minutes + "m and " + seconds + "s ago";
+        }
+    }, 1000);
+
+    window.addEventListener("resize", () => {
+        options.colors = [...allColours];
+            for(let colourIndex in hiddenColumns) {
+                colourIndex--;
+                options.colors.splice(options.colors.indexOf(allColours[colourIndex]), 1);
+            }
+            let view = new google.visualization.DataView(data);
+            view.hideColumns(hiddenColumns);
+            chart.draw(view, options);
+    });
 }
 
 
 async function drawChart() {
     document.getElementById("update").disabled = true;
-    let apiData = await fetch("https://playercount.plotzes.ml");
+    let apiData = await fetch("https://api.plotzes.ml/storage?name=playercount.json");
     apiData = await apiData.json();
     let formattedData = [];
     apiData.forEach(object => {
@@ -126,20 +150,19 @@ async function drawChart() {
             }
         }
     });
-
     if(apiData.length == 0) {
         document.getElementById("time").innerHTML = "???";
-        document.getElementsByClassName("time").forEach(element => {
-            element.innerHTML = "???";
-        });
-        document.getElementsByClassName("count").forEach(element => {
-            element.innerHTML = "??";
-        });
-        document.getElementsByClassName("record").forEach(element => {
-            element.innerHTML = "??";
-        });
+        for(let timeElement in document.getElementsByClassName("time")) {
+            timeElement.innerHTML = "??";
+        }
+        for(let timeElement in document.getElementsByClassName("count")) {
+            timeElement.innerHTML = "??";
+        }
+        for(let timeElement in document.getElementsByClassName("record")) {
+            timeElement.innerHTML = "??";
+        }
     } else {
-        document.getElementById("time").innerHTML = new Date(apiData[apiData.length - 1].date).toLocaleTimeString(undefined, dateOptions);
+        lastUpdateTime = apiData[apiData.length - 1].date;
 
         let recordCounts = document.getElementsByClassName("record");
         for(let i = 0; i < recordCounts.length; i++) {
@@ -189,9 +212,10 @@ async function drawChart() {
 }
 
 
+
 async function updateChartData() {
     document.getElementById("update").disabled = true;
-    let apiData = await fetch("https://playercount.plotzes.ml");
+    let apiData = await fetch("https://api.plotzes.ml/storage?name=playercount.json");
     apiData = await apiData.json();
     let lastDate = data.getValue(data.getNumberOfRows() - 1, 0);
     let newRows = [];
@@ -217,7 +241,7 @@ async function updateChartData() {
     });
 
 
-    document.getElementById("time").innerHTML = new Date(apiData[apiData.length - 1].date).toLocaleTimeString(undefined, dateOptions);
+    lastUpdateTime = apiData[apiData.length - 1].date;
 
     let recordCounts = document.getElementsByClassName("record");
     for(let i = 0; i < recordCounts.length; i++) {
@@ -231,6 +255,12 @@ async function updateChartData() {
 
     let playercounts = document.getElementsByClassName("count");
     let lastData = newRows[newRows.length - 1];
+
+    if(!lastData) {
+        document.getElementById("update").disabled = false;
+        return;
+    }
+
     for(let i = 0; i < lastData.length - 1; i++) {
         if(lastData[i + 1]) {
             playercounts[i].innerHTML = lastData[i + 1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

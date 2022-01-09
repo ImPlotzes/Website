@@ -16,6 +16,7 @@ html {
     background-color: #2d2f30;
     padding: 10px 20px;
     font-size: 22px;
+    position: relative;
     z-index: 15;
 }
 
@@ -202,4 +203,16 @@ td:hover {
 #scroll-setting {
     margin-top: 15px;
     outline: none;
+}
+
+
+@media screen and (max-width: 750px) {
+    #main {
+        width: 90%;
+    }
+
+    #collapsible, #content {
+        width: auto;
+        left: 0;
+    }
 }

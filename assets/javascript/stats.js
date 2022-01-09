@@ -9,7 +9,6 @@ function loadEvents() {
     document.querySelectorAll(".collapsible h3").forEach(head => {
         head.addEventListener("click", collapsibleEvent);
     });
-	
 
     /*Check if page loaded with player in URL*/
     const params = (new URL(document.location)).searchParams;
@@ -52,7 +51,7 @@ async function loadPlayer(player) {
     document.getElementById("loadingTemplate").style.display = "flex";
 
     /*Get the player data and then show it*/
-    let data = await fetch("https://stats.plotzes.ml?user=" + player);
+    let data = await fetch("https://api.plotzes.ml/stats?player=" + encodeURIComponent(player));
     data = await data.json();
     let success = showData(data);
     document.getElementById("loadingTemplate").style.display = "none";
@@ -70,7 +69,7 @@ function showData(json){
     /*Check if the api call was successful, if not then show the message and the error*/
     if(!json.success) {
         let messageDiv = document.querySelector("#search + .card");
-        messageDiv.innerHTML = json.message + "<br><br>(" + json.error + ")";
+        messageDiv.innerHTML = json.message + "<br><br>(" + json.code + ")";
         messageDiv.style.border = "1px solid #c51313";
         return false;
     }

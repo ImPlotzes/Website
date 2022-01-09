@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <style>
+
             .card {
                 background-color: #27292a;
                 border: 1px solid #2d2f30;
@@ -20,7 +21,22 @@
                 font-size: 16px;
                 line-height: 25px;
                 display: inline-block;
-                margin: 10px;
+                margin: 20px;
+            }
+
+            .card p {
+                margin-top: 0;
+            }
+
+            input {
+                font-family: inherit; 
+                background-color: #191b1d; 
+                outline: none; 
+                color: #d3d3d3; 
+                border: 1px solid gray; 
+                padding: 3px 5px; 
+                width: 70%; 
+                font-size: 1.1em;
             }
 
             button {
@@ -31,11 +47,33 @@
                 color: #d3d3d3;
                 border: 1px solid rgba(var(--main-color-rgb), 0.4);
                 padding: 3px 5px;
-                border-radius: 5px;
             }
 
             button:hover {
                 border: 1px solid rgba(var(--main-color-rgb), 0.8);
+            }
+
+            .link {
+                border: 1px solid gray;
+                margin: 10px 0 !important;
+                padding: 0 5px;
+                font-family: monospace;
+                word-wrap: break-word;
+                word-break: break-all;
+            }
+
+            img {
+                width: 100%;
+            }
+
+            @media screen and (max-width: 750px) {
+                button {
+                    margin: 10px 0;
+                }
+
+                input {
+                    width: 100%;
+                }
             }
         </style>
 
@@ -69,45 +107,41 @@
         <meta name="twitter:image" content="https://www.plotzes.ml/assets/images/png/images.png"> <!-- Image to use -->
 	</head>
 	<body>
-        <div id="root" style="padding-top: 20px; padding-left: 50px;">
-
-            
-
+        <div id="root">
             <div class="card" style="max-width: 800px;">
-                These are dynamic images (more coming soon&trade;) that are updated when they are loaded. 
-                You can use these in forum signatures or other places. 
-                Due to caching the images can be up to a few hours behind.
-                <hr style="border: none; border-bottom: 1px solid gray;">
-                These images are still in heavy development so if you have any suggestions or feedback, then be sure to join the <a href="/discord" target="_blank">Discord server</a>.
+                <p>
+                    This is a dynamic image that gets updated when it is loaded. 
+                    You can use it in forum signatures or other places. 
+                    Due to caching the image can be up to a few hours behind. 
+                    Enter a player name or UUID below to see how their image looks.
+                </p>
+                <input id="user" type="text" maxlength="36" placeholder="Enter player or UUID...">
+                <button id="button" onclick="editLinks()">Show picture</button>
             </div>
-            <div class="card">
-                <input id="user" type="text" maxlength="36" placeholder="Enter player or UUID..." style="font-family: inherit; background-color: #191b1d; outline: none; color: #d3d3d3; border: 1px solid gray; padding: 3px 5px; width: 500px; font-size: 1.1em;">
-                <button id="button" onclick="editLinks()">Show pictures</button>
-                <script>
-                    function editLinks() {
-                        let user = document.getElementById("user").value;
+            <script>
+                function editLinks() {
+                    let user = document.getElementById("user").value;
 
-                        let images = document.getElementsByTagName("img");
-                        for(let i = 0; i < images.length; i++) {
-                            let image = images.item(i);
-                            if(/[^/]+$/g.exec(image.src)[0].toLowerCase() == encodeURIComponent(user).toLowerCase() + ".png") {
-                                return;
-                            }
-                            image.src = image.src.replace(/[^/]+$/g, encodeURIComponent(user) + ".png");
+                    let images = document.getElementsByTagName("img");
+                    for(let i = 0; i < images.length; i++) {
+                        let image = images.item(i);
+                        if(/[^/]+$/g.exec(image.src)[0].toLowerCase() == encodeURIComponent(user).toLowerCase() + ".png") {
+                            return;
                         }
-
-                        let links = document.getElementsByTagName("pre");
-                        for(let i = 0; i < images.length; i++) {
-                            let link = links.item(i);
-                            link.innerHTML = link.innerHTML.replace(/[^/]+$/g, encodeURIComponent(user) + ".png");
-                        }
+                        image.src = image.src.replace(/[^/]+$/g, encodeURIComponent(user) + ".png");
                     }
-                </script>
-            </div>
+
+                    let links = document.getElementsByClassName("link");
+                    for(let i = 0; i < images.length; i++) {
+                        let link = links.item(i);
+                        link.innerHTML = link.innerHTML.replace(/[^/]+$/g, encodeURIComponent(user) + ".png");
+                    }
+                }
+            </script>
             <div class="card">
                 <h3 style="margin: 0;">Wizards Stats</h3>
-                <pre style="border: 1px solid gray">https://www.plotzes.ml/img/wizards/Plotzes.png</pre>
-                <img src="https://www.plotzes.ml/img/wizards/Plotzes.png">
+                <p class="link">https://www.plotzes.ml/img/wizards/Plotzes.png</p>
+                <img alt="Wizards stats" src="https://www.plotzes.ml/img/wizards/Plotzes.png">
             </div>
         </div>
 	</body>

@@ -43,8 +43,7 @@ button:hover {
 
 #search-container {
     display: none;
-    margin: 100px 15%;
-    margin-top: 75px;
+    margin: 75px 15%;
     padding: 20px;
     width: 70%;
     box-shadow: 2px 3px 7px 2px rgba(0, 0, 0, 0.2);
@@ -98,12 +97,13 @@ button:hover {
 #data {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 #profile {
     display: inline-block;
-    white-space: nowrap;
     margin: 25px 20px;
+    flex-grow: 1;
 }
 
 #playername {
@@ -115,7 +115,6 @@ button:hover {
 #stats {
     flex-grow: 1;
     margin: 25px 20px;
-    min-width: 0;
 }
 
 .collapsible {
@@ -164,16 +163,11 @@ table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
-    margin-top: 15px;
 }
 
 thead tr {
     font-weight: bold;
-    border-bottom: 1px solid gray;
-}
-
-tr {
-    border-bottom: 1px solid #484b4c;
+    border-bottom: 2px solid gray;
 }
 
 tbody tr:first-child td {
@@ -181,21 +175,32 @@ tbody tr:first-child td {
 }
 
 td {
-    padding: 5px 0;
+    padding: 5px 10px;
+    border: 1px solid #484b4c;
 }
 
 td:first-of-type {
     font-weight: bold;
-    border-right: 1px solid #353738;
+    border-right: 2px solid gray;
+    border-left: none;
     width: 70px;
 }
 
-td:first-of-type + td {
-    padding-left: 15px;
+td:last-of-type {
+    border-right: none;
+}
+
+thead tr td {
+    border-top: none;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
 }
 
 #loadingTemplate {
     display: none;
+    flex-wrap: wrap;
 }
 
 .loadingCard {
@@ -207,6 +212,7 @@ td:first-of-type + td {
     font-size: 16px;
     line-height: 25px;
     position: relative;
+    overflow: hidden;
 }
 
 .loadingCard hr {
@@ -221,6 +227,7 @@ td:first-of-type + td {
     background-color: #27292a;
     border-radius: 5px 5px;
     padding: 15px 20px;
+    overflow: hidden;
 }
 
 .loadingCollapsible h3 {
@@ -238,7 +245,7 @@ td:first-of-type + td {
 }
 
 .loadingCollapsible::after {
-    content: " ";
+    content: "";
     background: linear-gradient(100deg, rgba(255,255,255,0) 25%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 75%);
     width: 100%;
     height: 100%;
@@ -270,5 +277,31 @@ td:first-of-type + td {
     50% {
         clip-path: inset(0 100% 0 0);
         left: 100%;
+    }
+}
+
+
+@media screen and (max-width: 750px) {
+    #search-container {
+        margin: 40px 5%;
+        margin-bottom: 0;
+        width: 90%;
+    }
+
+    #stats {
+        width: calc(100% - 40px);
+    }
+
+    .loadingCard {
+        width: 100% !important;
+    }
+
+    .collapsible .content {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .content .card {
+        overflow-x: scroll;
     }
 }

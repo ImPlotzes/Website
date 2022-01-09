@@ -3,6 +3,16 @@
     --main-color-rgb: 0, 240, 240;
 }
 
+::-moz-selection {
+    color: #1d1f20;
+    background: rgba(var(--main-color-rgb), 0.7);
+  }
+  
+  ::selection {
+    color: #1d1f20;
+    background: rgba(var(--main-color-rgb), 0.8);
+  }
+
 body {
     background-color: #1d1f20;
     font-family: 'Quicksand', sans-serif;

@@ -16,9 +16,9 @@ let currentStat = {
 
 let leaderboardLoaded = false;
 async function innitLeaderboard() {
-    lb = await fetch("https://leaderboard.plotzes.ml");
+    lb = await fetch("https://api.plotzes.ml/storage?name=leaderboard.json");
     lb = await lb.json();
-    lbData = lb.lb_data;
+    lbData = lb;
     leaderboardLoaded = true;
 }
 innitLeaderboard();
@@ -40,12 +40,12 @@ async function afterLoad() {
 
 async function getLeaderboard() {
     
-    if(lb.success) {
+    if(!lb.code) {
         showStat("w", "Wins");
         return true;
     } else {
         const container = document.getElementById("tableContainer");
-        container.innerHTML = "Something went wrong!<br><br>" + lb.message + " (" + lb.error + ")";
+        container.innerHTML = "Something went wrong!<br><br>" + lb.message + " (" + lb.code + ")";
         document.getElementById("loadingScreen").style.display = "none";
         container.style.display = "block";
         return false;
@@ -98,11 +98,11 @@ function pageChange(change) {
 function searchPlayer() {
     let input = this.value.toLowerCase();
     if(input.trim().length != 0) {
-        lbData = lb.lb_data.filter(player => {
+        lbData = lb.filter(player => {
             return player.name.toLowerCase().includes(input);
         });
     } else {
-        lbData = lb.lb_data;
+        lbData = lb;
     }
     lbData.sort((a, b) => {
         return b[currentStat.type] - a[currentStat.type];
@@ -117,7 +117,7 @@ function searchPlayer() {
     header.innerHTML = header.textContent.substring(0, header.textContent.length - 1) + "<span style=\"color: lightgray\">&darr;</span>";
     for(let i = 1; i < headers.length; i++) {
         header = headers[i];
-        header.innerHTML = header.textContent.substring(0, header.textContent.length - 1) + "<span style=\"color: gray\">&#8597;</span>";
+        header.innerHTML = header.textContent.substring(0, header.textContent.length - 1) + "<span style=\"color: gray\">&#x2195;</span>";
     }
 
     showPage(pageNumber);
@@ -171,7 +171,7 @@ function sortTable(method) {
     let headerLength = headers.length;
     for(let i = 0; i < headerLength; i++) {
         let header = headers[i];
-        header.innerHTML = header.textContent.substring(0, header.textContent.length - 1) + "<span style=\"color: gray\">&#8597;</span>";
+        header.innerHTML = header.textContent.substring(0, header.textContent.length - 1) + "<span style=\"color: gray\">&#x2195;</span>";
     }
     let header = headers[method];
     if(order > 0) {
@@ -199,7 +199,7 @@ function showStat(type, displayname) {
     currentStat.displayname = displayname;
 
     /* Filter, sort and id the full leaderboard based on the stat type */
-    lbData = lb.lb_data.filter(player => {
+    lbData = lb.filter(player => {
         return player[type] != undefined;
     });
     lbData.sort((a, b) => {
@@ -221,9 +221,9 @@ function showStat(type, displayname) {
     for(let i = 1; i < headers.length; i++) {
         header = headers[i];
         if(i == 2) {
-            header.innerHTML = displayname + " <span style=\"color: gray\">&#8597;</span>";
+            header.innerHTML = displayname + " <span style=\"color: gray\">&#x2195;</span>";
         } else {
-            header.innerHTML = header.textContent.substring(0, header.textContent.length - 1) + "<span style=\"color: gray\">&#8597;</span>";
+            header.innerHTML = header.textContent.substring(0, header.textContent.length - 1) + "<span style=\"color: gray\">&#x2195;</span>";
         }
     }
 
@@ -275,11 +275,20 @@ function showCustomPage(page) {
             } else {
                 stat = stat.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
-            const innerRow = `
-                <td>${player.array_id}</td>
-                <td><a href="/stats/${player.id}">${player.name}</a></td>
-                <td>${stat}</td>
-                <td>${updateTime.getHours().toString().padStart(2, "0")}:${updateTime.getMinutes().toString().padStart(2, "0")}, ${updateTime.toLocaleDateString()}</td>`;
+            let innerRow;
+            if(window.innerWidth <= 750) {
+                innerRow = `
+                    <td>${player.array_id}</td>
+                    <td><a href="/stats/${player.id}">${player.name}</a></td>
+                    <td>${stat}</td>
+                    <td>${updateTime.toLocaleDateString()}</td>`;
+            } else {
+                innerRow = `
+                    <td>${player.array_id}</td>
+                    <td><a href="/stats/${player.id}">${player.name}</a></td>
+                    <td>${stat}</td>
+                    <td>${updateTime.getHours().toString().padStart(2, "0")}:${updateTime.getMinutes().toString().padStart(2, "0")}, ${updateTime.toLocaleDateString()}</td>`;
+            }
             row.innerHTML = innerRow;
             tbody.appendChild(row);
         } else {

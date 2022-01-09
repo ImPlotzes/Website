@@ -16,6 +16,7 @@ div.google-visualization-tooltip {
 
 #controls {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     margin: 0 50px 20px 50px;
@@ -24,6 +25,7 @@ div.google-visualization-tooltip {
 #controls * {
     display: inline-block;
     width: fit-content;
+    padding: 0 5px;
 }
 
 #info {
@@ -32,6 +34,7 @@ div.google-visualization-tooltip {
 
 #info > * {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     border-top: 1px solid #3f4141;
@@ -44,6 +47,11 @@ div.google-visualization-tooltip {
     width: 30%;
 }
 
+#update-container {
+    display: inline-block;
+    margin: 0 auto;
+}
+
 #update {
     background-color: #222;
     color: var(--main-color);
@@ -52,6 +60,7 @@ div.google-visualization-tooltip {
     font-family: inherit;
     padding: 10px 15px;
     font-size: 18px;
+    width: 100%;
     outline: none;
 }
 
@@ -62,6 +71,12 @@ div.google-visualization-tooltip {
 #update:disabled {
     color: rgba(var(--main-color-rgb), 0.5);
     text-decoration: line-through;
+}
+
+#time {
+    color: gray; 
+    font-style: italic; 
+    margin-top: 0;
 }
 
 .time {
@@ -75,4 +90,24 @@ div.google-visualization-tooltip {
 
 .content {
     font-size: 36px;
+}
+
+
+@media screen and (max-width: 750px) {
+    #controls {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+
+    #info > * {
+        width: 90%;
+    }
+
+    #info > * > * {
+        width: 100%;
+    }
+
+    .time {
+        margin-top: 15px;
+    }
 }

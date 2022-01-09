@@ -54,6 +54,11 @@ async function afterLoad() {
     let collapseElement = document.getElementById("collapse-sidebar");
     if(collapseElement) {
         collapseElement.addEventListener("click", collapse);
+        if(window.innerWidth <= 750) {
+            setTimeout(() => {
+                collapse();
+            }, 500);
+        }
     }
     let colorElement = document.getElementById("custom-color");
     if(colorElement) {
@@ -70,14 +75,14 @@ function customColor() {
 
 
 async function loadHeaderSidebar() {
-    ///*
+    /*
     let request = await fetch("/assets/html/header-sidebar.html");
     let div = document.createElement("div");
     div.innerHTML = await request.text();
     div.childNodes.forEach(child => {
         document.body.appendChild(child);
     })
-    //*/
+    */
 
     let pagename = document.querySelector('meta[name="pagename"]');
     if(!pagename) {
@@ -135,8 +140,8 @@ function collapse() {
     setTimeout(() => {
         try {
             options.colors = [...allColours];
-            for(let i = 0; i < hiddenColumns.length; i++) {
-                let colourIndex = hiddenColumns[i] - 1;
+            for(let colourIndex in hiddenColumns) {
+                colourIndex--;
                 options.colors.splice(options.colors.indexOf(allColours[colourIndex]), 1);
             }
             let view = new google.visualization.DataView(data);

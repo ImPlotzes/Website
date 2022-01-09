@@ -69,7 +69,7 @@ Only for header
     background-color: var(--main-color);
     position: fixed;
     top: 20px;
-    right: calc(50% - 15px);
+    left: calc(50% - 15px);
     width: 30px;
     height: 30px;
     border-radius: 30px;
@@ -316,4 +316,19 @@ Only for sidebar
 
 #sidebar.collapsed {
     max-width: 0;
+}
+
+
+@media screen and (max-width: 750px) {
+    #name {
+        display: none;
+    }
+
+    #theme-selector {
+        display: none;
+    }
+
+    #root {
+        margin-left: 0 !important;
+    }
 }
